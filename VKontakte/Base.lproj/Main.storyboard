@@ -189,7 +189,7 @@
             </objects>
             <point key="canvasLocation" x="2783" y="-516"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Friend-->
         <scene sceneID="Llm-Rg-JTz">
             <objects>
                 <collectionViewController id="K2M-V3-qzu" sceneMemberID="viewController">
@@ -218,7 +218,7 @@
                             <outlet property="delegate" destination="K2M-V3-qzu" id="tlV-EY-IdU"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Pk0-Yo-Lly"/>
+                    <navigationItem key="navigationItem" title="Friend" id="Pk0-Yo-Lly"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsB-Tb-5G6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
