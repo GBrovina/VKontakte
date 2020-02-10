@@ -221,25 +221,44 @@
         <!--Friend-->
         <scene sceneID="Llm-Rg-JTz">
             <objects>
-                <collectionViewController id="K2M-V3-qzu" sceneMemberID="viewController">
+                <collectionViewController id="K2M-V3-qzu" customClass="FriendsCollectionViewController" customModule="VKontakte" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="uAd-tf-VUi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7nQ-jH-Snl">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="123" height="134"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gL9-r1-Ln7">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Photo" id="gL9-r1-Ln7" customClass="FriendsCollectionViewCell" customModule="VKontakte" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="h3G-ka-QQN">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pigvin" translatesAutoresizingMaskIntoConstraints="NO" id="59L-dT-blh">
+                                            <rect key="frame" x="25" y="25" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="ccf-SQ-OzA"/>
+                                                <constraint firstAttribute="height" constant="100" id="cqW-Qa-5YR"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="59L-dT-blh" secondAttribute="bottom" constant="25" id="59n-ia-7T1"/>
+                                        <constraint firstAttribute="trailing" secondItem="59L-dT-blh" secondAttribute="trailing" constant="25" id="PH7-rB-BhM"/>
+                                        <constraint firstItem="59L-dT-blh" firstAttribute="top" secondItem="h3G-ka-QQN" secondAttribute="top" constant="25" id="R3P-L3-FZX"/>
+                                        <constraint firstItem="59L-dT-blh" firstAttribute="leading" secondItem="h3G-ka-QQN" secondAttribute="leading" constant="25" id="UyF-Tz-bnn"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="150" height="150"/>
+                                <connections>
+                                    <outlet property="friendsPhoto" destination="59L-dT-blh" id="Dzz-HX-IGg"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -251,7 +270,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsB-Tb-5G6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3568" y="-514"/>
+            <point key="canvasLocation" x="3566.666666666667" y="-514.28571428571422"/>
         </scene>
         <!--MyGroups-->
         <scene sceneID="epR-oX-z9n">
@@ -397,6 +416,7 @@
         <image name="mountains" width="640" height="1198"/>
         <image name="person.3" catalog="system" width="72" height="35"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
+        <image name="pigvin" width="88" height="100"/>
         <image name="surprisingly big album of iPhone wallpapers_1" width="640" height="260"/>
     </resources>
 </document>
