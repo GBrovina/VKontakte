@@ -177,7 +177,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70.333335876464844"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h6R-zs-MeL">
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n02-Oc-efb">
+                                            <rect key="frame" x="20" y="9" width="50" height="50.333333333333343"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="GL5-Fc-zmD"/>
+                                                <constraint firstAttribute="height" constant="50" id="g2e-ld-qOc"/>
+                                            </constraints>
+                                        </view>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h6R-zs-MeL">
                                             <rect key="frame" x="20" y="10.000000000000004" width="50" height="50.333333333333343"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="1KV-TW-bbf"/>
@@ -191,19 +199,24 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="h6R-zs-MeL" firstAttribute="centerY" secondItem="r8x-kF-JtM" secondAttribute="centerY" id="4KF-9X-UKy"/>
                                         <constraint firstItem="wsp-QU-0FU" firstAttribute="leading" secondItem="h6R-zs-MeL" secondAttribute="trailing" constant="100" id="5kc-D2-Dkl"/>
+                                        <constraint firstItem="n02-Oc-efb" firstAttribute="top" secondItem="r8x-kF-JtM" secondAttribute="top" constant="10" id="9uD-kS-Asq"/>
+                                        <constraint firstItem="n02-Oc-efb" firstAttribute="leading" secondItem="r8x-kF-JtM" secondAttribute="leading" constant="20" id="E5S-oo-nZh"/>
                                         <constraint firstItem="h6R-zs-MeL" firstAttribute="top" secondItem="r8x-kF-JtM" secondAttribute="top" constant="10" id="YfL-oJ-syg"/>
                                         <constraint firstItem="h6R-zs-MeL" firstAttribute="leading" secondItem="r8x-kF-JtM" secondAttribute="leading" constant="20" id="bAU-K3-T76"/>
                                         <constraint firstAttribute="bottom" secondItem="h6R-zs-MeL" secondAttribute="bottom" constant="10" id="cvI-Xp-rUI"/>
                                         <constraint firstItem="wsp-QU-0FU" firstAttribute="centerY" secondItem="r8x-kF-JtM" secondAttribute="centerY" id="p30-K9-X8J"/>
+                                        <constraint firstAttribute="bottom" secondItem="n02-Oc-efb" secondAttribute="bottom" constant="10" id="xnW-pF-6hY"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="friendsName" destination="wsp-QU-0FU" id="Sh9-VL-ARq"/>
                                     <outlet property="imageFriends" destination="h6R-zs-MeL" id="8w7-Q0-VYy"/>
-                                    <segue destination="K2M-V3-qzu" kind="show" id="On4-8p-p89"/>
+                                    <outlet property="shadow" destination="n02-Oc-efb" id="aHa-oo-Ojf"/>
+                                    <segue destination="K2M-V3-qzu" kind="show" identifier="" id="On4-8p-p89"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -247,12 +260,26 @@
                                                 <constraint firstAttribute="height" constant="100" id="cqW-Qa-5YR"/>
                                             </constraints>
                                         </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KR4-il-wCD" customClass="CustomControl" customModule="VKontakte" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="130" width="110" height="17"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="aNu-zT-6Kg"/>
+                                                <constraint firstAttribute="width" constant="130" id="jCP-21-vgy"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="KR4-il-wCD" firstAttribute="centerX" secondItem="59L-dT-blh" secondAttribute="centerX" id="4Gw-Nd-QfZ"/>
                                         <constraint firstAttribute="bottom" secondItem="59L-dT-blh" secondAttribute="bottom" constant="25" id="59n-ia-7T1"/>
+                                        <constraint firstAttribute="trailing" secondItem="KR4-il-wCD" secondAttribute="trailing" constant="20" symbolic="YES" id="6N5-cO-d7x"/>
+                                        <constraint firstItem="KR4-il-wCD" firstAttribute="top" secondItem="59L-dT-blh" secondAttribute="bottom" constant="5" id="KDE-lW-2NH"/>
                                         <constraint firstAttribute="trailing" secondItem="59L-dT-blh" secondAttribute="trailing" constant="25" id="PH7-rB-BhM"/>
                                         <constraint firstItem="59L-dT-blh" firstAttribute="top" secondItem="h3G-ka-QQN" secondAttribute="top" constant="25" id="R3P-L3-FZX"/>
                                         <constraint firstItem="59L-dT-blh" firstAttribute="leading" secondItem="h3G-ka-QQN" secondAttribute="leading" constant="25" id="UyF-Tz-bnn"/>
+                                        <constraint firstItem="KR4-il-wCD" firstAttribute="leading" secondItem="h3G-ka-QQN" secondAttribute="leading" constant="20" symbolic="YES" id="XDh-kP-dFt"/>
+                                        <constraint firstItem="KR4-il-wCD" firstAttribute="top" secondItem="59L-dT-blh" secondAttribute="bottom" constant="5" id="b3D-rp-UEs"/>
+                                        <constraint firstAttribute="bottom" secondItem="KR4-il-wCD" secondAttribute="bottom" constant="3" id="ntb-By-Mff"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="150" height="150"/>

@@ -23,6 +23,7 @@
 		3CCD968723EEF2F20019BEA9 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD968623EEF2F20019BEA9 /* Group.swift */; };
 		3CCD968923F1D7A00019BEA9 /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD968823F1D7A00019BEA9 /* FriendsCollectionViewController.swift */; };
 		3CCD968B23F1D8320019BEA9 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD968A23F1D8320019BEA9 /* FriendsCollectionViewCell.swift */; };
+		3CCD968D23F5BFBD0019BEA9 /* CustomControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD968C23F5BFBD0019BEA9 /* CustomControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		3CCD968623EEF2F20019BEA9 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		3CCD968823F1D7A00019BEA9 /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		3CCD968A23F1D8320019BEA9 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3CCD968C23F5BFBD0019BEA9 /* CustomControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				3CCD967923EEE8AC0019BEA9 /* FriendsTableViewCell.swift */,
 				3CCD968823F1D7A00019BEA9 /* FriendsCollectionViewController.swift */,
 				3CCD968A23F1D8320019BEA9 /* FriendsCollectionViewCell.swift */,
+				3CCD968C23F5BFBD0019BEA9 /* CustomControl.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				3CCD967F23EEE9FD0019BEA9 /* GroupCell.swift in Sources */,
 				3CCD968123EEEA150019BEA9 /* MyGroupController.swift in Sources */,
 				3CCD968323EEEA270019BEA9 /* GroupController.swift in Sources */,
+				3CCD968D23F5BFBD0019BEA9 /* CustomControl.swift in Sources */,
 				3CCD968523EEF2DA0019BEA9 /* Friends.swift in Sources */,
 				3C4A06D823E5EF5500569BF7 /* LoginViewController.swift in Sources */,
 				3CCD968923F1D7A00019BEA9 /* FriendsCollectionViewController.swift in Sources */,

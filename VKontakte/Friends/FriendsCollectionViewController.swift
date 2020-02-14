@@ -12,6 +12,8 @@ private let reuseIdentifier = "Cell"
 
 class FriendsCollectionViewController: UICollectionViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,11 +46,13 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath)
+        
+        
     
         // Configure the cell
     
