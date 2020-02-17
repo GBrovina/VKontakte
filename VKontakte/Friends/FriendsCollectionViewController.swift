@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class FriendsCollectionViewController: UICollectionViewController {
     
-      var image:UIImageView?
+      var imagePage:UIImage?
     
      
 
@@ -56,7 +56,7 @@ class FriendsCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath) as? FriendsCollectionViewCell
         
 
-        cell?.friendsPhoto = image
+        cell?.friendsPhoto.image = imagePage
     
         // Configure the cell
     

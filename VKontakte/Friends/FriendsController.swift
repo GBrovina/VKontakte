@@ -103,7 +103,7 @@ class FriendsTableViewController: UITableViewController {
             
             collectionViewController.title = cell.friendsName.text
            
-            collectionViewController.image? = cell.imageFriends
+            collectionViewController.imagePage = cell.imageFriends.image
             
 
             
