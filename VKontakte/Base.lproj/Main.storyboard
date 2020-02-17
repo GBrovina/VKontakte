@@ -216,7 +216,7 @@
                                     <outlet property="friendsName" destination="wsp-QU-0FU" id="Sh9-VL-ARq"/>
                                     <outlet property="imageFriends" destination="h6R-zs-MeL" id="8w7-Q0-VYy"/>
                                     <outlet property="shadow" destination="n02-Oc-efb" id="aHa-oo-Ojf"/>
-                                    <segue destination="K2M-V3-qzu" kind="show" identifier="" id="On4-8p-p89"/>
+                                    <segue destination="K2M-V3-qzu" kind="show" identifier="pageOfFriends" id="On4-8p-p89"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

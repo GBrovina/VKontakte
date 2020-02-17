@@ -13,7 +13,7 @@ class FriendsTableViewController: UITableViewController {
     
     
     
-    var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!),
+   var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!),
                   Friends(userName:"Lion",avatar:UIImage(named:"Lion")!),
                   Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!)]
     
@@ -96,7 +96,19 @@ class FriendsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        
+        if segue.identifier == "pageOfFriends" {
+            guard let collectionViewController = segue.destination as? FriendsCollectionViewController,
+                let cell = sender as? FriendsTableViewCell
+                else {return}
+            
+            collectionViewController.title = cell.friendsName.text
+           
+            collectionViewController.image? = cell.imageFriends
+            
+
+            
+            
+        }
         
         
     }

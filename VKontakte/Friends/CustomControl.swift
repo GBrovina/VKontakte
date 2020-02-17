@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@IBDesignable
+
 class CustomControl:UIControl{
     
     public var isLiked: Bool = false

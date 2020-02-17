@@ -11,9 +11,12 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class FriendsCollectionViewController: UICollectionViewController {
+    
+      var image:UIImageView?
+    
+     
 
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,13 +53,14 @@ class FriendsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath) as? FriendsCollectionViewCell
         
-        
+
+        cell?.friendsPhoto = image
     
         // Configure the cell
     
-        return cell
+        return cell!
     }
 
     // MARK: UICollectionViewDelegate
