@@ -15,11 +15,33 @@ class FriendsTableViewController: UITableViewController {
     
    var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!),
                   Friends(userName:"Lion",avatar:UIImage(named:"Lion")!),
-                  Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!)]
+                  Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!),
+                  Friends(userName:"Cow", avatar:UIImage(named:"cow")!),
+                  Friends(userName:"Cock",avatar:UIImage(named:"cock")!),
+                  Friends(userName:"Leopard",avatar:UIImage(named:"leopard")!)]
+    
+    var sortiedFriends = [Character:[Friends]]()
+    private func sort(friend:[Friends]) -> [Character:[Friends]] {
+        var namesDict = [Character:[Friends]]()
+        
+        friend
+            .sorted {$0.userName < $1.userName}
+            .forEach { friend in
+                guard let firstChar = friend.userName.first else {return}
+                if var thisCharName = namesDict[firstChar] {
+                    thisCharName.append(friend)
+                    namesDict[firstChar] = thisCharName
+                } else {
+                    namesDict[firstChar] = [friend]
+                }
+                
+        }
+        return namesDict
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.sortiedFriends = sort(friend:friend)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -31,19 +53,26 @@ class FriendsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return sortiedFriends.keys.count
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let firstChar = sortiedFriends.keys.sorted()[section]
+        return String(firstChar)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return friend.count
+        let keySorted = sortiedFriends.keys.sorted()
+        return sortiedFriends[keySorted[section]]?.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Friends", for: indexPath) as! FriendsTableViewCell
-        
-        let name = friend[indexPath.row]
+        let firstChar = sortiedFriends.keys.sorted()[indexPath.section]
+        let friend = sortiedFriends[firstChar]!
+        let name:Friends = friend[indexPath.row]
         cell.friendsName.text=name.userName
         cell.imageFriends.image=name.avatar
         
@@ -105,13 +134,6 @@ class FriendsTableViewController: UITableViewController {
            
             collectionViewController.imagePage = cell.imageFriends.image
             
-
-            
-            
         }
-        
-        
     }
-    
-
 }

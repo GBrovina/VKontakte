@@ -13,6 +13,17 @@ class MyGroupController: UITableViewController {
     var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
                    MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
     
+    private var fitredGroups = [MyGroup]()
+    
+    
+    @IBOutlet weak var searchGroup: UISearchBar! {
+        didSet{
+            searchGroup.delegate = self
+        }
+    }
+    
+    
+    
     @IBAction func addGroup (segue:UIStoryboardSegue) {
         if segue.identifier == "unGroups"{
             let groupController = segue.source as! GroupController
@@ -36,6 +47,7 @@ class MyGroupController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        fitredGroups = myGroup
     }
 
     // MARK: - Table view data source
@@ -47,7 +59,7 @@ class MyGroupController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return myGroup.count
+        return fitredGroups.count
     }
 
     
@@ -55,7 +67,7 @@ class MyGroupController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroup", for: indexPath) as! MyGroupCell
         
         
-        let name = myGroup[indexPath.row]
+        let name = fitredGroups[indexPath.row]
         cell.myGroupImage.image = name.imageGroup
         cell.myGroupName.text = name.groupName
 
@@ -109,5 +121,19 @@ class MyGroupController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+    extension MyGroupController:UISearchBarDelegate {
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            if searchText.isEmpty{
+                fitredGroups = myGroup
+                tableView.reloadData()
+            } else {
+                fitredGroups = myGroup.filter {$0.groupName.contains(searchText)}
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    
+    
+

@@ -1,21 +1,18 @@
 //
-//  GroupController.swift
+//  NewsTableViewController.swift
 //  VKontakte
 //
-//  Created by Галина  Бровина  on 08.02.2020.
+//  Created by Галина  Бровина  on 20.02.2020.
 //  Copyright © 2020 Галина  Бровина . All rights reserved.
 //
 
 import UIKit
 
-class GroupController: UITableViewController {
+class NewsTableViewController: UITableViewController {
 
+    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
+                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
     
-    
-    
-    
-    var unGroup = [MyGroup(groupName:"Other",imageGroup:UIImage(named:"others")!),
-    MyGroup(groupName:"Space",imageGroup:UIImage(named:"space")!) ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,25 +28,42 @@ class GroupController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return myGroup.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return unGroup.count
+        return 4
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "unGroups", for: indexPath) as! GroupCell
-        let name = unGroup[indexPath.row]
-               cell.groupImage.image = name.imageGroup
-               cell.groupName.text = name.groupName
-        // Configure the cell...
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "titleNews", for: indexPath) as! TitleNewsTableViewCell
+            let name = myGroup[indexPath.section]
+            cell.nameOfNews.text = name.groupName
+            cell.pictureOfNews.image = name.imageGroup
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textNews", for: indexPath) as! TextTableViewCell
+            cell.textNews.text = "A forest is a large area dominated by trees. Hundreds of more precise definitions of forest are used throughout the world, incorporating factors such as tree density, tree height, land use, legal standing and ecological function."
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
+            let name = myGroup[indexPath.section]
+            cell.photoNews.image = name.imageGroup
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
+            return cell
 
-        return cell
+        // Configure the cell...
+        }
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
