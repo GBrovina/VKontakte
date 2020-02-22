@@ -62,7 +62,7 @@ class CustomLineOfNews:UIControl{
         repostCount.textColor = .black
         self.addSubview(repostCount)
         
-        messageCount = UILabel(frame:CGRect(x: 180, y: 10, width: 10, height: 23))
+        messageCount = UILabel(frame:CGRect(x: 185, y: 10, width: 10, height: 23))
         messageCount.text = String(count)
         messageCount.textColor = .black
         self.addSubview(messageCount)

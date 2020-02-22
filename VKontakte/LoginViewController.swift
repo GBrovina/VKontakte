@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     func checkUserData()->Bool{
          guard let login=loginText.text,
          let password = passwordText.text else {return false}
-             if login == "1" && password == "1"{
+             if login == "admin" && password == "admin"{
                 return true
                 }else{
                 return false

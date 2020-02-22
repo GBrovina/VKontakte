@@ -30,8 +30,8 @@ class MyGroupController: UITableViewController {
             if let indexPath = groupController.tableView.indexPathForSelectedRow{
                 let group = groupController.unGroup[indexPath.row]
                 
-                if !myGroup.contains(where: {$0.groupName==group.groupName}) {
-                myGroup.append(group)
+                if !fitredGroups.contains(where: {$0.groupName==group.groupName}) {
+                fitredGroups.append(group)
                 tableView.reloadData()
                 }
             }
