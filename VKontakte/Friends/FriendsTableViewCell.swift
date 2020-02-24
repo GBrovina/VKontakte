@@ -21,6 +21,7 @@ class FriendsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         imageFriends.layer.cornerRadius = imageFriends.frame.height/2
 
         
@@ -36,10 +37,25 @@ class FriendsTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        avatarAnimatied()
         // Configure the view for the selected state
     }
+    
 
+    func avatarAnimatied(){
+      let animation = CASpringAnimation(keyPath: "transform.scale")
+      animation.fromValue = 0
+      animation.toValue = 1
+      animation.stiffness = 200
+      animation.mass = 2
+      animation.duration = 0.3
+      animation.beginTime = CACurrentMediaTime()
+      animation.fillMode = CAMediaTimingFillMode.backwards
+      self.imageFriends.layer.add(animation, forKey: nil)
+      self.shadow.layer.add(animation, forKey: nil)
+    }
+    
 }

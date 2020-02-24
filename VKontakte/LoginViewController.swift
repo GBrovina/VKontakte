@@ -17,17 +17,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
     
     @IBAction func goButton(_ sender: Any) {
+//        let indicator = CustomIndicator()
+//            view.addSubview(indicator)
+//            indicator.frame = CGRect(x: 130, y: 480, width: 30, height: 30)
+//            indicator.startAnimations()
+        
     }
     
     
     override func shouldPerformSegue (withIdentifier identifier: String, sender:Any?)->Bool{
+        let indicator = CustomIndicator()
+        view.addSubview(indicator)
+        indicator.frame = CGRect(x: 130, y: 480, width: 30, height: 30)
+        indicator.startAnimations()
+        
         let checkResult = checkUserData()
         if !checkResult{
             showLoginError()
               }
+       
         return checkResult
-              
           }
+    
+    
     func checkUserData()->Bool{
          guard let login=loginText.text,
          let password = passwordText.text else {return false}
@@ -52,8 +64,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    
-    
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
          print (#function)

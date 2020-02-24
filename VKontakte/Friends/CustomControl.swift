@@ -63,15 +63,41 @@ class CustomControl:UIControl{
            if isLiked == true {
                
                    likeCount.text = String(count+1)
-               
+                   likeAnimatied()
+                   
                
            } else {
                 
                     likeCount.text = String(count)
-               
+                    likeAnimatiedDown()
+                    
            }
            setNeedsDisplay()
            sendActions(for: .valueChanged)
            
        }
+    
+    func likeAnimatied(){
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.stiffness = 200
+        animation.mass = 2
+        animation.duration = 0.3
+        animation.beginTime = CACurrentMediaTime()
+        animation.fillMode = CAMediaTimingFillMode.backwards
+        self.likePic.layer.add(animation, forKey: nil)
+      }
+    
+    func likeAnimatiedDown(){
+          let animation = CASpringAnimation(keyPath: "transform.scale")
+          animation.fromValue = 1
+          animation.toValue = 0
+          animation.stiffness = 200
+          animation.mass = 2
+          animation.duration = 0.3
+          animation.beginTime = CACurrentMediaTime()
+          animation.fillMode = CAMediaTimingFillMode.backwards
+          self.likePic.layer.add(animation, forKey: nil)
+        }
 }
