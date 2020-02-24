@@ -92,7 +92,7 @@ class CustomControl:UIControl{
     func likeAnimatiedDown(){
           let animation = CASpringAnimation(keyPath: "transform.scale")
           animation.fromValue = 1
-          animation.toValue = 0
+          animation.toValue = 2
           animation.stiffness = 200
           animation.mass = 2
           animation.duration = 0.3

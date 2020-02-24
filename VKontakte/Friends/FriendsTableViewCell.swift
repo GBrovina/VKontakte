@@ -22,6 +22,10 @@ class FriendsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+        tapGR.numberOfTouchesRequired = 1
+        addGestureRecognizer(tapGR)
+        
         imageFriends.layer.cornerRadius = imageFriends.frame.height/2
 
         
@@ -36,7 +40,9 @@ class FriendsTableViewCell: UITableViewCell {
         
         // Initialization code
     }
-
+    @objc func avatarTapped(_ sender:UIGestureRecognizer){
+            avatarAnimatied()
+         }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
