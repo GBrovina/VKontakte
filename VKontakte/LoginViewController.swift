@@ -17,19 +17,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
     
     @IBAction func goButton(_ sender: Any) {
-//        let indicator = CustomIndicator()
-//            view.addSubview(indicator)
-//            indicator.frame = CGRect(x: 130, y: 480, width: 30, height: 30)
-//            indicator.startAnimations()
+        let indicator = CustomIndicator()
+            view.addSubview(indicator)
+            indicator.frame = CGRect(x: 130, y: 480, width: 30, height: 30)
+            indicator.startAnimations()
         
     }
     
     
     override func shouldPerformSegue (withIdentifier identifier: String, sender:Any?)->Bool{
-        let indicator = CustomIndicator()
-        view.addSubview(indicator)
-        indicator.frame = CGRect(x: 130, y: 480, width: 30, height: 30)
-        indicator.startAnimations()
+    
         
         let checkResult = checkUserData()
         if !checkResult{
@@ -61,6 +58,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         goButton.layer.cornerRadius = 10
+        
+        
+        
         // Do any additional setup after loading the view.
     }
 

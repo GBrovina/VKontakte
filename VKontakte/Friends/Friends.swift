@@ -12,9 +12,11 @@ import UIKit
 class Friends{
     var userName:String
     var avatar:UIImage
+    var photos:[UIImage]
     
-    init(userName:String,avatar:UIImage) {
+    init(userName:String,avatar:UIImage,photos:[UIImage]) {
         self.userName = userName
         self.avatar  = avatar
+        self.photos = photos
     }
 }

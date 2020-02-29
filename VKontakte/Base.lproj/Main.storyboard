@@ -454,6 +454,7 @@
                                 <size key="customSize" width="150" height="150"/>
                                 <connections>
                                     <outlet property="friendsPhoto" destination="59L-dT-blh" id="Dzz-HX-IGg"/>
+                                    <segue destination="DXQ-8v-piW" kind="show" identifier="photoOfFriendsSegue" id="hke-DX-eSA"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -467,6 +468,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsB-Tb-5G6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3566.666666666667" y="-514.28571428571422"/>
+        </scene>
+        <!--Photo Album-->
+        <scene sceneID="epW-Hk-goS">
+            <objects>
+                <viewController id="DXQ-8v-piW" customClass="PhotoAlbum" customModule="VKontakte" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SXB-Um-HRz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lg4-ZY-caF">
+                                <rect key="frame" x="0.0" y="246" width="414" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="vJF-Xx-gNA"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art" translatesAutoresizingMaskIntoConstraints="NO" id="Can-Co-fpD">
+                                <rect key="frame" x="0.0" y="246" width="414" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="YW4-A7-mXi"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Can-Co-fpD" firstAttribute="leading" secondItem="7Pk-ke-wkh" secondAttribute="leading" id="E64-Gx-epJ"/>
+                            <constraint firstItem="Lg4-ZY-caF" firstAttribute="centerY" secondItem="SXB-Um-HRz" secondAttribute="centerY" id="Gtf-JY-NAN"/>
+                            <constraint firstItem="7Pk-ke-wkh" firstAttribute="trailing" secondItem="Lg4-ZY-caF" secondAttribute="trailing" id="K5R-uq-Dm0"/>
+                            <constraint firstItem="Can-Co-fpD" firstAttribute="centerX" secondItem="SXB-Um-HRz" secondAttribute="centerX" id="aee-Ls-UYK"/>
+                            <constraint firstItem="Lg4-ZY-caF" firstAttribute="leading" secondItem="7Pk-ke-wkh" secondAttribute="leading" id="c58-3p-27i"/>
+                            <constraint firstItem="Lg4-ZY-caF" firstAttribute="centerX" secondItem="SXB-Um-HRz" secondAttribute="centerX" id="dvc-wT-J03"/>
+                            <constraint firstItem="Can-Co-fpD" firstAttribute="centerY" secondItem="SXB-Um-HRz" secondAttribute="centerY" id="fCa-Oj-FPt"/>
+                            <constraint firstItem="Can-Co-fpD" firstAttribute="trailing" secondItem="7Pk-ke-wkh" secondAttribute="trailing" id="mhQ-Oq-wna"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7Pk-ke-wkh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qn2-XR-av0"/>
+                    <connections>
+                        <outlet property="additionalIV" destination="Lg4-ZY-caF" id="9X0-aB-GZt"/>
+                        <outlet property="photoOfFriends" destination="Can-Co-fpD" id="nQJ-kU-ieN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z9J-Kg-hbW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4426.0869565217399" y="-515.625"/>
         </scene>
         <!--MyGroups-->
         <scene sceneID="epR-oX-z9n">
@@ -634,6 +679,7 @@
     </scenes>
     <resources>
         <image name="Forest" width="700" height="990"/>
+        <image name="art" width="1080" height="1338"/>
         <image name="doc.plaintext" catalog="system" width="56" height="64"/>
         <image name="mountains" width="640" height="1198"/>
         <image name="person.3" catalog="system" width="72" height="35"/>

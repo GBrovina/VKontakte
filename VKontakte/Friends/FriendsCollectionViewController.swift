@@ -12,8 +12,8 @@ private let reuseIdentifier = "Cell"
 
 class FriendsCollectionViewController: UICollectionViewController {
     
-      var imagePage:UIImage?
-    
+//      var imagePage:UIImage?
+      var photoAlbum = [UIImage]()
      
 
 
@@ -29,15 +29,25 @@ class FriendsCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    /*
+   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if segue.identifier == "photoOfFriendsSegue" {
+         guard let viewController = segue.destination as? PhotoAlbum,
+            let bigPhoto = collectionView.indexPathsForSelectedItems?.first
+             else {return}
+        
+            viewController.selectedFriend = photoAlbum
+            viewController.numberOfSection = bigPhoto.item
+            collectionView.deselectItem(at: bigPhoto, animated: true)
+            
+        }
     }
-    */
+    
 
     // MARK: UICollectionViewDataSource
 
@@ -49,14 +59,12 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return photoAlbum.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath) as? FriendsCollectionViewCell
-        
-
-        cell?.friendsPhoto.image = imagePage
+        cell?.friendsPhoto.image = photoAlbum[indexPath.item]
     
         // Configure the cell
     

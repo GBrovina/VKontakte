@@ -23,8 +23,10 @@ class FriendsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
-        tapGR.numberOfTouchesRequired = 1
-        addGestureRecognizer(tapGR)
+//        tapGR.numberOfTouchesRequired = 1
+//        addGestureRecognizer(tapGR)
+        imageFriends.isUserInteractionEnabled = true
+        imageFriends.addGestureRecognizer(tapGR)
         
         imageFriends.layer.cornerRadius = imageFriends.frame.height/2
 

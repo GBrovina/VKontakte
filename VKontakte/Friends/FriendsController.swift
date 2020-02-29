@@ -13,12 +13,7 @@ class FriendsTableViewController: UITableViewController {
     
     
     
-   var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!),
-                  Friends(userName:"Lion",avatar:UIImage(named:"Lion")!),
-                  Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!),
-                  Friends(userName:"Cow", avatar:UIImage(named:"cow")!),
-                  Friends(userName:"Cock",avatar:UIImage(named:"cock")!),
-                  Friends(userName:"Leopard",avatar:UIImage(named:"leopard")!)]
+   public var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!, photos:[UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!]), Friends(userName:"Lion",avatar:UIImage(named:"Lion")!,photos:[UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!]), Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!,photos:[UIImage(named:"pigvin")!,UIImage(named:"pigvin")!,UIImage(named:"pigvin")!]), Friends(userName:"Cow",avatar:UIImage(named:"cow")!,photos:[UIImage(named:"cow")!]), Friends(userName:"Cock",avatar:UIImage(named:"cock")!,photos:[UIImage(named:"Cock_2")!,UIImage(named:"cock_3")!,UIImage(named:"Cock_2")!,UIImage(named:"cock")!]), Friends(userName:"Leopard",avatar:UIImage(named:"leopard")!,photos:[UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!])]
     
     var sortiedFriends = [Character:[Friends]]()
     private func sort(friend:[Friends]) -> [Character:[Friends]] {
@@ -122,17 +117,22 @@ class FriendsTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "pageOfFriends" {
             guard let collectionViewController = segue.destination as? FriendsCollectionViewController,
-                let cell = sender as? FriendsTableViewCell
+//                let cell = sender as? FriendsTableViewCell,
+                let selectedCell = tableView.indexPathForSelectedRow
                 else {return}
             
-            collectionViewController.title = cell.friendsName.text
-           
-            collectionViewController.imagePage = cell.imageFriends.image
+            let firstChar = sortiedFriends.keys.sorted()[selectedCell.section]
+            let friend = sortiedFriends[firstChar]!
+            let name:Friends = friend[selectedCell.row]
+            
+            collectionViewController.title = name.userName
+            collectionViewController.photoAlbum = name.photos
             
         }
     }
