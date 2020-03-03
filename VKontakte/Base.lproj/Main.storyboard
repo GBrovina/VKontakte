@@ -142,7 +142,7 @@
         <!--Friends-->
         <scene sceneID="5a9-6n-Pqn">
             <objects>
-                <navigationController id="bnR-jO-GZG" sceneMemberID="viewController">
+                <navigationController id="bnR-jO-GZG" customClass="CustomNavigationController" customModule="VKontakte" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="person.fill" catalog="system" id="ChR-S8-wad"/>
                     <navigationItem key="navigationItem" id="gNu-FI-HEu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
