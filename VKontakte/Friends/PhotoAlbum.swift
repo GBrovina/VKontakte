@@ -28,20 +28,20 @@ class PhotoAlbum: UIViewController {
 //
 //        swipeleft.direction = .left
 //        photoOfFriends?.addGestureRecognizer(swipeleft)
-//
+
 //        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeRight(_:)))
 //
-//        swipeleft.direction = .right
+//        swiperight.direction = .right
 //        photoOfFriends?.addGestureRecognizer(swiperight)
-        
+//    }
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
         photoOfFriends?.isUserInteractionEnabled  = true
         photoOfFriends?.addGestureRecognizer(tap)
     }
-    
+
     @objc func tap (_ tap:UITapGestureRecognizer) {
            guard numberOfSection+1 <= selectedFriend.count-1 else {return}
-        
+
         additionalIV.transform = CGAffineTransform(translationX: 1.5*(self.photoOfFriends?.bounds.width)!, y: 200).concatenating(CGAffineTransform(scaleX: 1.5, y: 1.5))
         additionalIV.image = selectedFriend[numberOfSection+1]
         UIView.animate(withDuration: 0.7,
@@ -50,7 +50,7 @@ class PhotoAlbum: UIViewController {
                        animations: {
                         self.photoOfFriends!.transform = CGAffineTransform(translationX: -1.5*(self.photoOfFriends?.bounds.width)!, y: -100).concatenating(CGAffineTransform(scaleX: 0.6, y: 0.6))
                         self.additionalIV.transform = .identity
-            
+
         }) { _ in
             self.numberOfSection += 1
             self.photoOfFriends?.image = self.selectedFriend[self.numberOfSection]
@@ -71,11 +71,12 @@ class PhotoAlbum: UIViewController {
 //          photoOfFriends?.image = selectedFriend[numberOfSection]
 //      }
     
-    func photoOfFriendsAnimatied(){
-        UIView.animate(withDuration: 2,
-                       animations: {
-                        self.photoOfFriends?.frame.origin.y -= 100
-        })
-      
-    }
+//    func photoOfFriendsAnimatied(){
+//        UIView.animate(withDuration: 2,
+//                       animations: {
+//                        self.photoOfFriends?.frame.origin.y -= 100
+//        })
+//
+//    }
 }
+
