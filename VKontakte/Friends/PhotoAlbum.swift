@@ -21,62 +21,71 @@ class PhotoAlbum: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         guard !selectedFriend.isEmpty else {return}
         self.photoOfFriends?.image = selectedFriend[numberOfSection]
 //        НЕ работает свайп
-//        let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeLeft(_:)))
-//
-//        swipeleft.direction = .left
-//        photoOfFriends?.addGestureRecognizer(swipeleft)
+        let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeLeft(_:)))
+        swipeleft.delegate = self
+        swipeleft.direction = .left
+        photoOfFriends?.addGestureRecognizer(swipeleft)
 
-//        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeRight(_:)))
-//
-//        swiperight.direction = .right
-//        photoOfFriends?.addGestureRecognizer(swiperight)
+        let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeRight(_:)))
+        swiperight.delegate = self
+        swiperight.direction = .right
+        photoOfFriends?.addGestureRecognizer(swiperight)
+    }
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+//        photoOfFriends?.isUserInteractionEnabled  = true
+//        photoOfFriends?.addGestureRecognizer(tap)
 //    }
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-        photoOfFriends?.isUserInteractionEnabled  = true
-        photoOfFriends?.addGestureRecognizer(tap)
-    }
-
-    @objc func tap (_ tap:UITapGestureRecognizer) {
-           guard numberOfSection+1 <= selectedFriend.count-1 else {return}
-
-        additionalIV.transform = CGAffineTransform(translationX: 1.5*(self.photoOfFriends?.bounds.width)!, y: 200).concatenating(CGAffineTransform(scaleX: 1.5, y: 1.5))
-        additionalIV.image = selectedFriend[numberOfSection+1]
-        UIView.animate(withDuration: 0.7,
-                       delay: 0,
-                       options: .curveEaseInOut,
-                       animations: {
-                        self.photoOfFriends!.transform = CGAffineTransform(translationX: -1.5*(self.photoOfFriends?.bounds.width)!, y: -100).concatenating(CGAffineTransform(scaleX: 0.6, y: 0.6))
-                        self.additionalIV.transform = .identity
-
-        }) { _ in
-            self.numberOfSection += 1
-            self.photoOfFriends?.image = self.selectedFriend[self.numberOfSection]
-            self.photoOfFriends?.transform = .identity
-    }
-       }
+//
+//    @objc func tap (_ tap:UITapGestureRecognizer) {
+//           guard numberOfSection+1 <= selectedFriend.count-1 else {return}
+//
+//        additionalIV.transform = CGAffineTransform(translationX: 1.5*(self.photoOfFriends?.bounds.width)!, y: 200).concatenating(CGAffineTransform(scaleX: 1.5, y: 1.5))
+//        additionalIV.image = selectedFriend[numberOfSection+1]
+//        UIView.animate(withDuration: 0.7,
+//                       delay: 0,
+//                       options: .curveEaseInOut,
+//                       animations: {
+//                        self.photoOfFriends!.transform = CGAffineTransform(translationX: -1.5*(self.photoOfFriends?.bounds.width)!, y: -100).concatenating(CGAffineTransform(scaleX: 0.6, y: 0.6))
+//                        self.additionalIV.transform = .identity
+//
+//        }) { _ in
+//            self.numberOfSection += 1
+//            self.photoOfFriends?.image = self.selectedFriend[self.numberOfSection]
+//            self.photoOfFriends?.transform = .identity
+//    }
+//       }
     
 //    НЕ Работает свайп
-//    @objc func photoSwipeLeft (_ swipe:UISwipeGestureRecognizer) {
-//        guard numberOfSection+1 <= selectedFriend.count-1 else {return}
-//        numberOfSection += 1
-//        photoOfFriends?.image = selectedFriend[numberOfSection]
-//    }
-//
-//    @objc func photoSwipeRight (_ swipe:UISwipeGestureRecognizer) {
-//          guard numberOfSection >= 1 else {return}
-//          numberOfSection -= 1
-//          photoOfFriends?.image = selectedFriend[numberOfSection]
-//      }
+    @objc func photoSwipeLeft (_ swipe:UISwipeGestureRecognizer) {
+        guard numberOfSection+1 <= selectedFriend.count-1 else {return}
+        numberOfSection += 1
+        photoOfFriends?.image = selectedFriend[numberOfSection]
+    }
+
+    @objc func photoSwipeRight (_ swipe:UISwipeGestureRecognizer) {
+          guard numberOfSection >= 1 else {return}
+          numberOfSection -= 1
+          photoOfFriends?.image = selectedFriend[numberOfSection]
+      }
     
-//    func photoOfFriendsAnimatied(){
-//        UIView.animate(withDuration: 2,
-//                       animations: {
-//                        self.photoOfFriends?.frame.origin.y -= 100
-//        })
-//
-//    }
+    func photoOfFriendsAnimatied(){
+        UIView.animate(withDuration: 2,
+                       animations: {
+                        self.photoOfFriends?.frame.origin.y -= 100
+        })
+
+    }
 }
 
+extension PhotoAlbum : UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return true
+        
+    }
+}

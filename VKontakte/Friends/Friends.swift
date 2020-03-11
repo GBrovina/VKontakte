@@ -20,3 +20,4 @@ class Friends{
         self.photos = photos
     }
 }
+
