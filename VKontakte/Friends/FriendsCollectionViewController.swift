@@ -11,6 +11,8 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class FriendsCollectionViewController: UICollectionViewController {
+    let photoService = VKService()
+    
     
 //      var imagePage:UIImage?
       var photoAlbum = [UIImage]()
@@ -19,7 +21,9 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        photoService.photoOfPerson()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

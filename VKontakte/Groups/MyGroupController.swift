@@ -10,6 +10,9 @@ import UIKit
 
 class MyGroupController: UITableViewController {
 
+    let myGroupService = VKService()
+    
+    
     var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
                    MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
     
@@ -42,6 +45,7 @@ class MyGroupController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        myGroupService.listOfGroup()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

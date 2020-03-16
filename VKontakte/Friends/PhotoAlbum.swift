@@ -25,16 +25,21 @@ class PhotoAlbum: UIViewController {
         
         guard !selectedFriend.isEmpty else {return}
         self.photoOfFriends?.image = selectedFriend[numberOfSection]
+        
 //        НЕ работает свайп
         let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeLeft(_:)))
+        photoOfFriends?.isUserInteractionEnabled = false
         swipeleft.delegate = self
         swipeleft.direction = .left
         photoOfFriends?.addGestureRecognizer(swipeleft)
+        photoOfFriends?.isUserInteractionEnabled = true
 
         let swiperight = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeRight(_:)))
+        
         swiperight.delegate = self
         swiperight.direction = .right
         photoOfFriends?.addGestureRecognizer(swiperight)
+        photoOfFriends?.isUserInteractionEnabled = true
     }
 //        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
 //        photoOfFriends?.isUserInteractionEnabled  = true
@@ -63,29 +68,45 @@ class PhotoAlbum: UIViewController {
 //    НЕ Работает свайп
     @objc func photoSwipeLeft (_ swipe:UISwipeGestureRecognizer) {
         guard numberOfSection+1 <= selectedFriend.count-1 else {return}
-        numberOfSection += 1
-        photoOfFriends?.image = selectedFriend[numberOfSection]
-    }
+        
+        additionalIV.transform = CGAffineTransform(translationX: 1.5*(self.photoOfFriends?.bounds.width)!, y: 200).concatenating(CGAffineTransform(scaleX: 1.5, y: 1.5))
+                additionalIV.image = selectedFriend[numberOfSection+1]
+                UIView.animate(withDuration: 0.7,
+                               delay: 0,
+                               options: .curveEaseInOut,
+                               animations: {
+                                self.photoOfFriends!.transform = CGAffineTransform(translationX: -1.5*(self.photoOfFriends?.bounds.width)!, y: -100).concatenating(CGAffineTransform(scaleX: 0.6, y: 0.6))
+                                self.additionalIV.transform = .identity
+        
+                }) { _ in
+                    self.numberOfSection += 1
+                    self.photoOfFriends?.image = self.selectedFriend[self.numberOfSection]
+                    self.photoOfFriends?.transform = .identity
+            }
+               }
 
     @objc func photoSwipeRight (_ swipe:UISwipeGestureRecognizer) {
           guard numberOfSection >= 1 else {return}
-          numberOfSection -= 1
-          photoOfFriends?.image = selectedFriend[numberOfSection]
-      }
-    
-    func photoOfFriendsAnimatied(){
-        UIView.animate(withDuration: 2,
-                       animations: {
-                        self.photoOfFriends?.frame.origin.y -= 100
-        })
-
-    }
+        
+        additionalIV.transform = CGAffineTransform(translationX: -1.5*(self.photoOfFriends?.bounds.width)!, y: -200).concatenating(CGAffineTransform(scaleX: 1.5, y: 1.5))
+                      additionalIV.image = selectedFriend[numberOfSection-1]
+                      UIView.animate(withDuration: 0.7,
+                                     delay: 0,
+                                     options: .curveEaseInOut,
+                                     animations: {
+                                      self.photoOfFriends!.transform = CGAffineTransform(translationX: 1.5*(self.photoOfFriends?.bounds.width)!, y: 100).concatenating(CGAffineTransform(scaleX: 0.6, y: 0.6))
+                                      self.additionalIV.transform = .identity
+              
+                      }) { _ in
+                          self.numberOfSection -= 1
+                          self.photoOfFriends?.image = self.selectedFriend[self.numberOfSection]
+                          self.photoOfFriends?.transform = .identity
+                  }
+                     }
 }
 
 extension PhotoAlbum : UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        
         return true
-        
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController {
 
-    
+    let friendsService = VKService()
     
     
    public var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!, photos:[UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!]), Friends(userName:"Lion",avatar:UIImage(named:"Lion")!,photos:[UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!]), Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!,photos:[UIImage(named:"pigvin")!,UIImage(named:"pigvin")!,UIImage(named:"pigvin")!]), Friends(userName:"Cow",avatar:UIImage(named:"cow")!,photos:[UIImage(named:"cow")!]), Friends(userName:"Cock",avatar:UIImage(named:"cock")!,photos:[UIImage(named:"Cock_2")!,UIImage(named:"cock_3")!,UIImage(named:"Cock_2")!,UIImage(named:"cock")!]), Friends(userName:"Leopard",avatar:UIImage(named:"leopard")!,photos:[UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!])]
@@ -37,6 +37,9 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sortiedFriends = sort(friend:friend)
+        
+        friendsService.listOfFriends()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
