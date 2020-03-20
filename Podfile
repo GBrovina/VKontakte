@@ -6,7 +6,7 @@ target 'VKontakte' do
   use_frameworks!
 
   pod 'Alamofire', '~> 5.0'
-
+  pod 'SwiftyJSON'
   # Pods for VKontakte
 
 end

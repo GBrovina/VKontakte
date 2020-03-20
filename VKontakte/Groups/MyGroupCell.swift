@@ -21,6 +21,16 @@ class MyGroupCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        myGroupImage.layer.cornerRadius = myGroupImage.frame.height/2
+
+        
+//        shadow.layer.cornerRadius = shadow.frame.height/2
+//        shadow.layer.shadowOffset = .zero
+//        shadow.layer.shadowRadius = 5
+//        shadow.layer.shadowColor = UIColor.black.cgColor
+//        shadow.layer.shadowOpacity = 0.7
+        
         // Initialization code
     }
 
