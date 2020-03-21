@@ -11,15 +11,25 @@ import UIKit
 class GroupController: UITableViewController {
 
     
+    let myGroupService = VKService()
+    var myGroup = [MyGroup]()
     
-    
-    
-    var unGroup = [MyGroup(groupName:"Other",imageGroup:UIImage(named:"others")!),
-    MyGroup(groupName:"Space",imageGroup:UIImage(named:"space")!) ]
+//    var unGroup = [MyGroup(groupName:"Other",imageGroup:UIImage(named:"others")!),
+//    MyGroup(groupName:"Space",imageGroup:UIImage(named:"space")!) ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        myGroupService.listOfGroup { [weak self] responce in
+            guard let self = self else {return}
+            switch responce{
+            case .success(let myGroup):
+             self.myGroup = myGroup
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+        }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,14 +46,15 @@ class GroupController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return unGroup.count
+        return myGroup.count
+//        unGroup.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "unGroups", for: indexPath) as! GroupCell
-        let name = unGroup[indexPath.row]
-               cell.groupImage.image = name.imageGroup
+        let name = myGroup[indexPath.row]
+        cell.groupImage.image = UIImage(named:name.imageGroup)
                cell.groupName.text = name.groupName
         // Configure the cell...
 

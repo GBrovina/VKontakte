@@ -11,10 +11,10 @@ import UIKit
 class MyGroupController: UITableViewController {
 
     let myGroupService = VKService()
+    var myGroup = [MyGroup]()
     
-    
-    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
-                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
+//    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
+//                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
     
     private var fitredGroups = [MyGroup]()
     
@@ -31,7 +31,7 @@ class MyGroupController: UITableViewController {
         if segue.identifier == "unGroups"{
             let groupController = segue.source as! GroupController
             if let indexPath = groupController.tableView.indexPathForSelectedRow{
-                let group = groupController.unGroup[indexPath.row]
+                let group = groupController.myGroup[indexPath.row]
                 
                 if !fitredGroups.contains(where: {$0.groupName==group.groupName}) {
                 fitredGroups.append(group)
@@ -44,14 +44,24 @@ class MyGroupController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        myGroupService.listOfGroup()
+        myGroupService.listOfGroup { [weak self] responce in
+                   guard let self = self else {return}
+                   switch responce{
+                   case .success(let myGroup):
+                    self.myGroup = myGroup
+                    self.fitredGroups = myGroup
+                       self.tableView.reloadData()
+                   case .failure(let error):
+                       print(error.localizedDescription)
+               }
+               }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        fitredGroups = myGroup
+//        fitredGroups = myGroup
     }
 
     // MARK: - Table view data source
@@ -72,7 +82,7 @@ class MyGroupController: UITableViewController {
         
         
         let name = fitredGroups[indexPath.row]
-        cell.myGroupImage.image = name.imageGroup
+        cell.myGroupImage.image = UIImage(named:name.imageGroup)
         cell.myGroupName.text = name.groupName
 
         // Configure the cell...

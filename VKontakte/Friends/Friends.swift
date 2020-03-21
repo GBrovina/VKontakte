@@ -28,15 +28,16 @@ import SwiftyJSON
 class Friends{
     var userName:String
     var avatar:String
-//    var photos:[UIImage]
+    var userId:Int
 
 
 
     init(_ json:JSON) {
-        self.userName = json["first_name"].stringValue
+        self.userName = json["first_name"].stringValue+" "+json["last_name"].stringValue
         
         self.avatar = json["photo_200_orig"].stringValue
         
+        self.userId = json["id"].intValue
     }
 
 

@@ -377,10 +377,9 @@
                                                 <constraint firstAttribute="height" constant="50" id="g2e-ld-qOc"/>
                                             </constraints>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h6R-zs-MeL">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h6R-zs-MeL">
                                             <rect key="frame" x="20" y="10.000000000000004" width="50" height="50.333333333333343"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="1KV-TW-bbf"/>
                                                 <constraint firstAttribute="width" constant="50" id="4aQ-1K-ieR"/>
                                             </constraints>
                                         </imageView>

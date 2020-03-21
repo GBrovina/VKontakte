@@ -10,9 +10,9 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
 
-    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
-                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
-    
+//    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
+//                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
+    var myGroup = [MyGroup]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class NewsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleNews", for: indexPath) as! TitleNewsTableViewCell
             let name = myGroup[indexPath.section]
             cell.nameOfNews.text = name.groupName
-            cell.pictureOfNews.image = name.imageGroup
+            cell.pictureOfNews.image = UIImage(named:name.imageGroup)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textNews", for: indexPath) as! TextTableViewCell
@@ -52,7 +52,7 @@ class NewsTableViewController: UITableViewController {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
             let name = myGroup[indexPath.section]
-            cell.photoNews.image = name.imageGroup
+            cell.photoNews.image = UIImage(named:name.imageGroup)
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell

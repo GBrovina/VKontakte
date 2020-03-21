@@ -12,7 +12,8 @@ private let reuseIdentifier = "Cell"
 
 class FriendsCollectionViewController: UICollectionViewController {
     let photoService = VKService()
-    
+    var photo  = [PhotoService]()
+    var userId:Int = 0
     
 //      var imagePage:UIImage?
       var photoAlbum = [UIImage]()
@@ -22,7 +23,16 @@ class FriendsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photoService.photoOfPerson()
+        photoService.photoOfPerson(userId) { [weak self] responce in
+            guard let self = self else {return}
+            switch responce{
+            case .success(let photo):
+                self.photo = photo
+                self.collectionView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+        }
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -63,12 +73,14 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return photoAlbum.count
+        return photo.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath) as? FriendsCollectionViewCell
-        cell?.friendsPhoto.image = photoAlbum[indexPath.item]
+        let photoAlbumService:PhotoService = photo[indexPath.item]
+        cell?.friendsPhoto.image = UIImage(named:photoAlbumService.userPhoto)
+//        cell?.friendsPhoto.image = photoAlbum[indexPath.item]
     
         // Configure the cell
     

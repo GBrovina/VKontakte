@@ -17,23 +17,7 @@ class FriendsTableViewController: UITableViewController {
 //   public var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!, photos:[UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!]), Friends(userName:"Lion",avatar:UIImage(named:"Lion")!,photos:[UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!]), Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!,photos:[UIImage(named:"pigvin")!,UIImage(named:"pigvin")!,UIImage(named:"pigvin")!]), Friends(userName:"Cow",avatar:UIImage(named:"cow")!,photos:[UIImage(named:"cow")!]), Friends(userName:"Cock",avatar:UIImage(named:"cock")!,photos:[UIImage(named:"Cock_2")!,UIImage(named:"cock_3")!,UIImage(named:"Cock_2")!,UIImage(named:"cock")!]), Friends(userName:"Leopard",avatar:UIImage(named:"leopard")!,photos:[UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!])]
     
     var sortiedFriends = [Character:[Friends]]()
-//    private func sort(friend:[Friends]) -> [Character:[Friends]] {
-//        var namesDict = [Character:[Friends]]()
-//        
-//        friend
-//            .sorted {$0.userName < $1.userName}
-//            .forEach { friend in
-//                guard let firstChar = friend.userName.first else {return}
-//                if var thisCharName = namesDict[firstChar] {
-//                    thisCharName.append(friend)
-//                    namesDict[firstChar] = thisCharName
-//                } else {
-//                    namesDict[firstChar] = [friend]
-//                }
-//                
-//        }
-//        return namesDict
-//    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +27,7 @@ class FriendsTableViewController: UITableViewController {
             switch responce{
             case .success(let friend):
                 self.friend = friend
-                
+                self.sortiedFriends = sort(friend:friend)
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)
@@ -66,7 +50,7 @@ class FriendsTableViewController: UITableViewController {
               }
               return namesDict
           }
-        self.sortiedFriends = sort(friend:friend)
+//        self.sortiedFriends = sort(friend:friend)
         
         
         
@@ -101,6 +85,7 @@ class FriendsTableViewController: UITableViewController {
         let firstChar = sortiedFriends.keys.sorted()[indexPath.section]
         let friend = sortiedFriends[firstChar]!
         let name:Friends = friend[indexPath.row]
+        
         cell.friendsName.text=name.userName
         cell.imageFriends.image=UIImage(named:name.avatar)
         
@@ -163,7 +148,8 @@ class FriendsTableViewController: UITableViewController {
             let firstChar = sortiedFriends.keys.sorted()[selectedCell.section]
             let friend = sortiedFriends[firstChar]!
             let name:Friends = friend[selectedCell.row]
-            
+            let userId = name.userId
+            collectionViewController.userId = userId
             collectionViewController.title = name.userName
 //            collectionViewController.photoAlbum = name.photos
             

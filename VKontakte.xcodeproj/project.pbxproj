@@ -36,6 +36,7 @@
 		3CCD968923F1D7A00019BEA9 /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD968823F1D7A00019BEA9 /* FriendsCollectionViewController.swift */; };
 		3CCD968B23F1D8320019BEA9 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD968A23F1D8320019BEA9 /* FriendsCollectionViewCell.swift */; };
 		3CCD968D23F5BFBD0019BEA9 /* CustomControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD968C23F5BFBD0019BEA9 /* CustomControl.swift */; };
+		3CD926FA2425411800700643 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD926F92425411800700643 /* Photo.swift */; };
 		3CEBD927241E36CD002F0744 /* VKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEBD926241E36CD002F0744 /* VKLoginViewController.swift */; };
 		3CEBD929241EA444002F0744 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEBD928241EA444002F0744 /* Services.swift */; };
 		D8D46F4AAE6778876A5B5A60 /* Pods_VKontakte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957743EC7D0DA8518F5F9DA9 /* Pods_VKontakte.framework */; };
@@ -73,6 +74,7 @@
 		3CCD968823F1D7A00019BEA9 /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		3CCD968A23F1D8320019BEA9 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3CCD968C23F5BFBD0019BEA9 /* CustomControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomControl.swift; sourceTree = "<group>"; };
+		3CD926F92425411800700643 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		3CEBD926241E36CD002F0744 /* VKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
 		3CEBD928241EA444002F0744 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		3CEBD92A241EB3C8002F0744 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +169,7 @@
 				3CCD968C23F5BFBD0019BEA9 /* CustomControl.swift */,
 				3C9E8DAD2406D28400CD2773 /* PhotoAlbum.swift */,
 				3CEBD926241E36CD002F0744 /* VKLoginViewController.swift */,
+				3CD926F92425411800700643 /* Photo.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				3CCD967A23EEE8AC0019BEA9 /* FriendsTableViewCell.swift in Sources */,
 				3C4A06D623E5EF5500569BF7 /* SceneDelegate.swift in Sources */,
 				3CCD968B23F1D8320019BEA9 /* FriendsCollectionViewCell.swift in Sources */,
+				3CD926FA2425411800700643 /* Photo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

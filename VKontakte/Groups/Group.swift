@@ -8,15 +8,30 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
-class MyGroup {
+//class MyGroup {
+//
+//
+//    var groupName:String
+//    var imageGroup:UIImage
+//
+//    init(groupName:String,imageGroup:UIImage) {
+//        self.groupName = groupName
+//        self.imageGroup = imageGroup
+//    }
+//}
 
-    
+class MyGroup{
     var groupName:String
-    var imageGroup:UIImage
-    
-    init(groupName:String,imageGroup:UIImage) {
-        self.groupName = groupName
-        self.imageGroup = imageGroup
+    var imageGroup:String
+
+    init(_ json:JSON) {
+        self.groupName = json["name"].stringValue
+
+        self.imageGroup = json["photo_50"].stringValue
+
     }
+
+
 }
