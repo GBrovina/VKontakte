@@ -11,10 +11,17 @@ import WebKit
 
 class VKLoginViewController:UIViewController{
     
-    @IBOutlet private weak var webView: WKWebView!
+//    @IBOutlet private weak var webView: WKWebView!
+    @IBOutlet weak var webView: WKWebView!
+    
+   
+    @IBOutlet weak var success: UIButton!
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        success.layer.cornerRadius = 10
+        
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
