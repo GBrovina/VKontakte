@@ -55,7 +55,7 @@ class FriendsCollectionViewController: UICollectionViewController {
             let bigPhoto = collectionView.indexPathsForSelectedItems?.first
              else {return}
         
-            viewController.selectedFriend = photoAlbum
+            viewController.selectedFriends = photo
             viewController.numberOfSection = bigPhoto.item
             collectionView.deselectItem(at: bigPhoto, animated: true)
             
@@ -79,7 +79,9 @@ class FriendsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath) as? FriendsCollectionViewCell
         let photoAlbumService:PhotoService = photo[indexPath.item]
-        cell?.friendsPhoto.image = UIImage(named:photoAlbumService.userPhoto)
+        if let url = URL(string:photoAlbumService.userPhoto),
+        let data = try? Data(contentsOf: url){
+            cell?.friendsPhoto.image = UIImage(data: data)}
 //        cell?.friendsPhoto.image = photoAlbum[indexPath.item]
     
         // Configure the cell

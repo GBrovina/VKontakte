@@ -85,9 +85,13 @@ class FriendsTableViewController: UITableViewController {
         let firstChar = sortiedFriends.keys.sorted()[indexPath.section]
         let friend = sortiedFriends[firstChar]!
         let name:Friends = friend[indexPath.row]
+    
         
         cell.friendsName.text=name.userName
-        cell.imageFriends.image=UIImage(named:name.avatar)
+        
+        if let url = URL(string:name.avatar),
+            let data = try? Data(contentsOf: url){
+            cell.imageFriends.image=UIImage(data:data)}
         
 
         // Configure the cell...

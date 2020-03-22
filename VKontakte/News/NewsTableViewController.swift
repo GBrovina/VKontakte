@@ -10,13 +10,24 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
 
+    let myGroupService = VKService()
 //    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
 //                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
     var myGroup = [MyGroup]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        myGroupService.listOfGroup { [weak self] responce in
+            guard let self = self else {return}
+            switch responce{
+            case .success(let myGroup):
+             self.myGroup = myGroup
+             
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+        }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -43,7 +54,10 @@ class NewsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleNews", for: indexPath) as! TitleNewsTableViewCell
             let name = myGroup[indexPath.section]
             cell.nameOfNews.text = name.groupName
-            cell.pictureOfNews.image = UIImage(named:name.imageGroup)
+            
+            if let url = URL(string:name.imageGroup),
+            let data = try? Data(contentsOf: url){
+                cell.pictureOfNews.image = UIImage(data:data)}
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textNews", for: indexPath) as! TextTableViewCell
@@ -52,7 +66,9 @@ class NewsTableViewController: UITableViewController {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
             let name = myGroup[indexPath.section]
-            cell.photoNews.image = UIImage(named:name.imageGroup)
+            if let url = URL(string:name.imageGroup),
+            let data = try? Data(contentsOf: url){
+                cell.photoNews.image = UIImage(data:data)}
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell

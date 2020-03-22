@@ -82,7 +82,9 @@ class MyGroupController: UITableViewController {
         
         
         let name = fitredGroups[indexPath.row]
-        cell.myGroupImage.image = UIImage(named:name.imageGroup)
+        if let url = URL(string:name.imageGroup),
+        let data = try? Data(contentsOf: url){
+            cell.myGroupImage.image = UIImage(data:data)}
         cell.myGroupName.text = name.groupName
 
         // Configure the cell...

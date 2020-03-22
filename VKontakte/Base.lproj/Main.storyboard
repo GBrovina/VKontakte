@@ -142,7 +142,6 @@
         <!--Login View Controller-->
         <scene sceneID="kbe-yu-ffv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fHw-Rg-ObA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="h46-Ml-cyK" customClass="VKLoginViewController" customModule="VKontakte" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XlE-GN-MPR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -202,6 +201,7 @@
                         <outlet property="webView" destination="FPV-Z8-s5I" id="moU-vD-Nxo"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fHw-Rg-ObA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-736.23188405797111" y="96.428571428571431"/>
         </scene>

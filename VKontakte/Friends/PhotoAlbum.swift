@@ -13,9 +13,10 @@ import SwiftyJSON
 class PhotoAlbum: UIViewController {
     
     
-    var selectedFriend:[UIImage] = []
+//   var selectedFriend:[UIImage] = []
     var numberOfSection:Int = 0
     
+    var selectedFriends:[PhotoService] = []
     
     @IBOutlet weak var additionalIV: UIImageView!
     @IBOutlet weak var photoOfFriends: UIImageView?
@@ -24,10 +25,13 @@ class PhotoAlbum: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard !selectedFriend.isEmpty else {return}
-        self.photoOfFriends?.image = selectedFriend[numberOfSection]
+
+        guard !selectedFriends.isEmpty else {return}
+        if let url = URL(string:selectedFriends[numberOfSection].userPhoto),
+        let data = try? Data(contentsOf: url){
+            self.photoOfFriends?.image = UIImage(data:data)}
         
-//        НЕ работает свайп
+
         let swipeleft = UISwipeGestureRecognizer(target: self, action: #selector(photoSwipeLeft(_:)))
         photoOfFriends?.isUserInteractionEnabled = false
         swipeleft.delegate = self
@@ -44,10 +48,12 @@ class PhotoAlbum: UIViewController {
     }
 
     @objc func photoSwipeLeft (_ swipe:UISwipeGestureRecognizer) {
-        guard numberOfSection+1 <= selectedFriend.count-1 else {return}
+        guard numberOfSection+1 <= selectedFriends.count-1 else {return}
         
         additionalIV.transform = CGAffineTransform(translationX: 1.5*(self.photoOfFriends?.bounds.width)!, y: 200).concatenating(CGAffineTransform(scaleX: 1.5, y: 1.5))
-                additionalIV.image = selectedFriend[numberOfSection+1]
+        if let url = URL(string:selectedFriends[numberOfSection+1].userPhoto),
+        let data = try? Data(contentsOf: url){
+        additionalIV.image = UIImage(data:data)}
                 UIView.animate(withDuration: 0.7,
                                delay: 0,
                                options: .curveEaseInOut,
@@ -57,7 +63,9 @@ class PhotoAlbum: UIViewController {
         
                 }) { _ in
                     self.numberOfSection += 1
-                    self.photoOfFriends?.image = self.selectedFriend[self.numberOfSection]
+                    if let url = URL(string:self.selectedFriends[self.numberOfSection].userPhoto),
+                    let data = try? Data(contentsOf: url){
+                        self.photoOfFriends?.image = UIImage(data:data)}
                     self.photoOfFriends?.transform = .identity
             }
                }
@@ -66,7 +74,10 @@ class PhotoAlbum: UIViewController {
           guard numberOfSection >= 1 else {return}
         
         additionalIV.transform = CGAffineTransform(translationX: -1.5*(self.photoOfFriends?.bounds.width)!, y: -200).concatenating(CGAffineTransform(scaleX: 1.5, y: 1.5))
-                      additionalIV.image = selectedFriend[numberOfSection-1]
+        if let url = URL(string:selectedFriends[numberOfSection-1].userPhoto),
+        let data = try? Data(contentsOf: url){
+        additionalIV.image = UIImage(data:data)}
+        
                       UIView.animate(withDuration: 0.7,
                                      delay: 0,
                                      options: .curveEaseInOut,
@@ -76,7 +87,10 @@ class PhotoAlbum: UIViewController {
               
                       }) { _ in
                           self.numberOfSection -= 1
-                          self.photoOfFriends?.image = self.selectedFriend[self.numberOfSection]
+                        
+                          if let url = URL(string:self.selectedFriends[self.numberOfSection].userPhoto),
+                          let data = try? Data(contentsOf: url){
+                              self.photoOfFriends?.image = UIImage(data:data)}
                           self.photoOfFriends?.transform = .identity
                   }
                      }

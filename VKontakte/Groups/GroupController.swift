@@ -54,8 +54,11 @@ class GroupController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "unGroups", for: indexPath) as! GroupCell
         let name = myGroup[indexPath.row]
-        cell.groupImage.image = UIImage(named:name.imageGroup)
-               cell.groupName.text = name.groupName
+        
+        if let url = URL(string:name.imageGroup),
+        let data = try? Data(contentsOf: url){
+            cell.groupImage.image = UIImage(data:data)}
+            cell.groupName.text = name.groupName
         // Configure the cell...
 
         return cell

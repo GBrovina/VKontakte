@@ -16,3 +16,4 @@ class Session {
     var token:String = .init()
     var userId:Int = .init()
 }
+
