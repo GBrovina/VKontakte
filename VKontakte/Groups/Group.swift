@@ -9,29 +9,17 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
-//class MyGroup {
-//
-//
-//    var groupName:String
-//    var imageGroup:UIImage
-//
-//    init(groupName:String,imageGroup:UIImage) {
-//        self.groupName = groupName
-//        self.imageGroup = imageGroup
-//    }
-//}
+class MyGroup: Object {
+    @objc dynamic var groupName:String = ""
+    @objc dynamic var imageGroup:String = ""
 
-class MyGroup{
-    var groupName:String
-    var imageGroup:String
-
-    init(_ json:JSON) {
+    convenience init(_ json:JSON) {
+        self.init()
         self.groupName = json["name"].stringValue
 
         self.imageGroup = json["photo_50"].stringValue
 
     }
-
-
 }

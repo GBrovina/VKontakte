@@ -13,6 +13,7 @@
 		3C4A06DB23E5EF5500569BF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4A06D923E5EF5500569BF7 /* Main.storyboard */; };
 		3C4A06DD23E5EF5900569BF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4A06DC23E5EF5900569BF7 /* Assets.xcassets */; };
 		3C4A06E023E5EF5900569BF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4A06DE23E5EF5900569BF7 /* LaunchScreen.storyboard */; };
+		3C566696242932F400DB5CF0 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C566695242932F400DB5CF0 /* DataBase.swift */; };
 		3C9E8D9F23FED75C00CD2773 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9E8D9E23FED75C00CD2773 /* NewsTableViewController.swift */; };
 		3C9E8DA123FEDC8600CD2773 /* TitleNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9E8DA023FEDC8600CD2773 /* TitleNewsTableViewCell.swift */; };
 		3C9E8DA323FEDC9C00CD2773 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9E8DA223FEDC9C00CD2773 /* TextTableViewCell.swift */; };
@@ -51,6 +52,7 @@
 		3C4A06DC23E5EF5900569BF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C4A06DF23E5EF5900569BF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C4A06E123E5EF5900569BF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C566695242932F400DB5CF0 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		3C9E8D9E23FED75C00CD2773 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		3C9E8DA023FEDC8600CD2773 /* TitleNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNewsTableViewCell.swift; sourceTree = "<group>"; };
 		3C9E8DA223FEDC9C00CD2773 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				3C4A06E123E5EF5900569BF7 /* Info.plist */,
 				3CA5AC77241957A000C3D62E /* Session.swift */,
 				3CEBD928241EA444002F0744 /* Services.swift */,
+				3C566695242932F400DB5CF0 /* DataBase.swift */,
 			);
 			path = VKontakte;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				3C9E8DB1240D5E8A00CD2773 /* CustomNavigationController.swift in Sources */,
 				3C9E8DA723FEDCE400CD2773 /* LikesTableViewCell.swift in Sources */,
 				3CCD968923F1D7A00019BEA9 /* FriendsCollectionViewController.swift in Sources */,
+				3C566696242932F400DB5CF0 /* DataBase.swift in Sources */,
 				3C9E8D9F23FED75C00CD2773 /* NewsTableViewController.swift in Sources */,
 				3C9E8DA123FEDC8600CD2773 /* TitleNewsTableViewCell.swift in Sources */,
 				3C4A06D423E5EF5500569BF7 /* AppDelegate.swift in Sources */,

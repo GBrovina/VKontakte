@@ -9,12 +9,14 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
-class PhotoService {
-    var userId:Int
-    var userPhoto:String
+class PhotoService: Object{
+    @objc dynamic var userId:Int = 0
+    @objc dynamic var userPhoto:String = ""
     
-    init(_ json:JSON) {
+   convenience init(_ json:JSON) {
+        self.init()
         self.userId = json["id"].intValue
         self.userPhoto = json["sizes"][3]["url"].stringValue
     }
