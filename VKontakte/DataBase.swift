@@ -11,10 +11,11 @@ import SwiftyJSON
 import RealmSwift
 
 class DataBase {
-    
+//   MARK: -Groups
     func saveGroups ( groups:[MyGroup] ) {
         do{
             let realm = try Realm()
+            print (realm.configuration.fileURL)
             realm.beginWrite()
             realm.add(groups)
             try realm.commitWrite()
@@ -34,11 +35,14 @@ class DataBase {
             }
         }
     
-    
+ //   MARK: -Friends
     func saveFriends ( friends:[Friends] ) {
            do{
                let realm = try Realm()
+               print (realm.configuration.fileURL)
+               let oldList = realm.objects(Friends.self)
                realm.beginWrite()
+               realm.delete(oldList)
                realm.add(friends)
                try realm.commitWrite()
            } catch {
@@ -56,11 +60,14 @@ class DataBase {
                    return []
                }
            }
-    
+   //   MARK: -Photo
     func savePhoto ( photo:[PhotoService] ) {
         do{
             let realm = try Realm()
+            print (realm.configuration.fileURL)
+            let oldListOfPhoto = realm.objects(PhotoService.self)
             realm.beginWrite()
+            realm.delete(oldListOfPhoto)
             realm.add(photo)
             try realm.commitWrite()
         } catch {

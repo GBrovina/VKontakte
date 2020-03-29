@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupController: UITableViewController {
 
@@ -19,17 +20,21 @@ class GroupController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myGroupService.listOfGroup {
+                   self.loadData()
+                   self.tableView.reloadData()
+               }
         
-        myGroupService.listOfGroup { [weak self] responce in
-            guard let self = self else {return}
-            switch responce{
-            case .success(let myGroup):
-             self.myGroup = myGroup
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
-        }
-        }
+//        myGroupService.listOfGroup { responce in
+//            guard let self = self else {return}
+//            switch responce{
+//            case .success(let myGroup):
+//             self.myGroup = myGroup
+//                self.tableView.reloadData()
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//        }
+//        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,6 +42,18 @@ class GroupController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    func loadData(){
+           do{
+               let realm = try Realm()
+               let groups = realm.objects(MyGroup.self)
+               myGroup = Array(groups)
+               
+           }
+           catch{
+               print (error.localizedDescription)
+           }
+       }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

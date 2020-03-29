@@ -26,6 +26,7 @@
 		3C9E8DB3240D634F00CD2773 /* CustomPopPushTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9E8DB2240D634F00CD2773 /* CustomPopPushTransitioning.swift */; };
 		3C9E8DB5240EBD7600CD2773 /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9E8DB4240EBD7600CD2773 /* CustomInteractiveTransition.swift */; };
 		3CA5AC78241957A000C3D62E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA5AC77241957A000C3D62E /* Session.swift */; };
+		3CB800C52430C70A0082A87F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB800C42430C70A0082A87F /* WebKit.framework */; };
 		3CCD967723EEE7190019BEA9 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD967623EEE7190019BEA9 /* FriendsController.swift */; };
 		3CCD967A23EEE8AC0019BEA9 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD967923EEE8AC0019BEA9 /* FriendsTableViewCell.swift */; };
 		3CCD967D23EEE9E90019BEA9 /* MyGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD967C23EEE9E90019BEA9 /* MyGroupCell.swift */; };
@@ -65,6 +66,7 @@
 		3C9E8DB2240D634F00CD2773 /* CustomPopPushTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopPushTransitioning.swift; sourceTree = "<group>"; };
 		3C9E8DB4240EBD7600CD2773 /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		3CA5AC77241957A000C3D62E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		3CB800C42430C70A0082A87F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3CCD967623EEE7190019BEA9 /* FriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		3CCD967923EEE8AC0019BEA9 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		3CCD967C23EEE9E90019BEA9 /* MyGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupCell.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB800C52430C70A0082A87F /* WebKit.framework in Frameworks */,
 				D8D46F4AAE6778876A5B5A60 /* Pods_VKontakte.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +204,7 @@
 		DEC5EE4289697E064B21DFD6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CB800C42430C70A0082A87F /* WebKit.framework */,
 				3CEBD92F241EB911002F0744 /* Alamofire.framework */,
 				3CEBD92A241EB3C8002F0744 /* Alamofire.framework */,
 				957743EC7D0DA8518F5F9DA9 /* Pods_VKontakte.framework */,

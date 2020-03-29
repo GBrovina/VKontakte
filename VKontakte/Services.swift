@@ -16,19 +16,20 @@ class VKService{
     let baseUrl = "https://api.vk.com"
     let apiKey = Session.instance.token
    
-    
-    func listOfFriends(completion: @escaping (Swift.Result<[Friends],Error>) -> Void){
-    let apiKey = Session.instance.token
-    let path = "/method/friends.get"
-    let dataB:DataBase = .init()
-        
-    let parameters:Parameters = [
-        "order":apiKey,
-        "fields":"nickname, photo_200_orig",
-        "extended": 1,
-        "access_token":apiKey,
-        "v":5.103
-    ]
+//  MARK: -List of Friends
+//    func listOfFriends(completion: @escaping (Swift.Result<[Friends],Error>) -> Void){
+    func listOfFriends(completion: @escaping () -> Void){
+        let apiKey = Session.instance.token
+        let path = "/method/friends.get"
+        let dataB:DataBase = .init()
+            
+        let parameters:Parameters = [
+            "order":apiKey,
+            "fields":"nickname, photo_200_orig",
+            "extended": 1,
+            "access_token":apiKey,
+            "v":5.103
+        ]
     
         let url = baseUrl+path
         
@@ -43,13 +44,15 @@ class VKService{
                 print(friend.count)
                 dataB.saveFriends(friends: friend)
                 print(dataB.friends())
-                completion(.success(friend))
+                completion()
             case .failure(let error):
                 print(error.localizedDescription)
             }
     }
 }
-     func listOfGroup(completion: @escaping (Swift.Result<[MyGroup],Error>) -> Void){
+//    MARK: - List of Group
+     func listOfGroup(completion: @escaping () -> Void){
+//        func listOfGroup(completion: @escaping (Swift.Result<[MyGroup],Error>) -> Void){
         let apiKey = Session.instance.token
         let path = "/method/groups.get"
         let dataB:DataBase = .init()
@@ -73,13 +76,16 @@ class VKService{
                             print(group.count)
                             dataB.saveGroups(groups: group)
                             print(dataB.groups())
-                            completion(.success(group))
+                             completion()
+//                            completion(.success(group))
                         case .failure(let error):
                             print(error.localizedDescription)
                         }
         }
     }
-    func photoOfPerson(_ userId:Int,completion: @escaping (Swift.Result<[PhotoService],Error>) -> Void ){
+//    MARK: - photo of Person
+    func photoOfPerson(_ userId:Int,completion: @escaping () -> Void ){
+//        func photoOfPerson(_ userId:Int,completion: @escaping (Swift.Result<[PhotoService],Error>) -> Void ){
         let apiKey = Session.instance.token
         let path = "/method/photos.getAll"
         let dataB:DataBase = .init()
@@ -103,7 +109,7 @@ class VKService{
                     print(photo.count)
                     dataB.savePhoto(photo: photo)
                     print(dataB.photo())
-                    completion(.success(photo))
+                    completion()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

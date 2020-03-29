@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupController: UITableViewController {
 
@@ -44,17 +45,24 @@ class MyGroupController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myGroupService.listOfGroup { [weak self] responce in
-                   guard let self = self else {return}
-                   switch responce{
-                   case .success(let myGroup):
-                    self.myGroup = myGroup
-                    self.fitredGroups = myGroup
-                       self.tableView.reloadData()
-                   case .failure(let error):
-                       print(error.localizedDescription)
-               }
-               }
+        
+        myGroupService.listOfGroup {
+            self.loadData()
+            self.fitredGroups = self.myGroup
+            self.tableView.reloadData()
+        }
+//        myGroupService.listOfGroup { [weak self] responce in
+//                   guard let self = self else {return}
+//                   switch responce{
+//                   case .success(let myGroup):
+//                    self.loadData()
+////                    self.myGroup = myGroup
+//                    self.fitredGroups = myGroup
+//                       self.tableView.reloadData()
+//                   case .failure(let error):
+//                       print(error.localizedDescription)
+//               }
+//               }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -62,6 +70,18 @@ class MyGroupController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
 //        fitredGroups = myGroup
+    }
+    
+    func loadData(){
+        do{
+            let realm = try Realm()
+            let groups = realm.objects(MyGroup.self)
+            myGroup = Array(groups)
+            
+        }
+        catch{
+            print (error.localizedDescription)
+        }
     }
 
     // MARK: - Table view data source

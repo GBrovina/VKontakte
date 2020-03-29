@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
 
@@ -22,17 +23,23 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        friendsService.listOfFriends { [weak self] responce in
-            guard let self = self else {return}
-            switch responce{
-            case .success(let friend):
-                self.friend = friend
-                self.sortiedFriends = sort(friend:friend)
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
+        friendsService.listOfFriends{
+            self.loadData()
+            self.sortiedFriends = sort(friend: self.friend)
+            self.tableView.reloadData()
         }
-        }
+        
+//        friendsService.listOfFriends { [weak self] responce in
+//            guard let self = self else {return}
+//            switch responce{
+//            case .success(let friend):
+//                self.friend = friend
+//                self.sortiedFriends = sort(friend:friend)
+//                self.tableView.reloadData()
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//        }
+//        }
         func sort(friend:[Friends]) -> [Character:[Friends]] {
               var namesDict = [Character:[Friends]]()
               
@@ -61,6 +68,19 @@ class FriendsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    func loadData(){
+        do{
+            let realm = try Realm()
+            let friends = realm.objects(Friends.self)
+            friend = Array(friends)
+            
+        }
+        catch{
+            print (error.localizedDescription)
+        }
+    }
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

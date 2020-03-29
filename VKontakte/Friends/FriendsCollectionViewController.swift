@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let reuseIdentifier = "Cell"
 
@@ -23,16 +24,21 @@ class FriendsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photoService.photoOfPerson(userId) { [weak self] responce in
-            guard let self = self else {return}
-            switch responce{
-            case .success(let photo):
-                self.photo = photo
-                self.collectionView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
+        photoService.photoOfPerson(userId){
+            self.loadData()
+            self.collectionView.reloadData()
         }
-        }
+        
+//        photoService.photoOfPerson(userId) { [weak self] responce in
+//            guard let self = self else {return}
+//            switch responce{
+//            case .success(let photo):
+//                self.photo = photo
+//                self.collectionView.reloadData()
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//        }
+//        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -42,7 +48,19 @@ class FriendsCollectionViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    
+    func loadData(){
+           do{
+               let realm = try Realm()
+               let photos = realm.objects(PhotoService.self)
+               photo = Array(photos)
+               
+           }
+           catch{
+               print (error.localizedDescription)
+           }
+       }
+       
    
     // MARK: - Navigation
 
