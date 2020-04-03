@@ -12,22 +12,43 @@ import RealmSwift
 private let reuseIdentifier = "Cell"
 
 class FriendsCollectionViewController: UICollectionViewController {
-    let photoService = VKService()
-    var photo  = [PhotoService]()
-    var userId:Int = 0
     
-//      var imagePage:UIImage?
-      var photoAlbum = [UIImage]()
+    let photoService = VKService()
+//    var photo  = [PhotoService]()
+    var userId:Int = 0
+    var photo: Results<PhotoService>?
+    var token:[NotificationToken] = []
+    
+    var photoAlbum = [UIImage]()
      
-
-
+    func observePhoto(){
+        guard let realm = try? Realm() else {return}
+        photo = realm.objects(PhotoService.self)
+        print(photo?.count)
+        photo?.observe{(changes) in
+            switch changes{
+                          case .initial:
+                              self.collectionView.reloadData()
+                          case .update(_,let deletions,let insertions,let modifications):
+                              self.collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
+                              self.collectionView.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0)}))
+                              self.collectionView.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
+                          case .error(let error):
+                              print (error.localizedDescription)
+                            }
+                    }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        observePhoto()
         
-        photoService.photoOfPerson(userId){
-            self.loadData()
-            self.collectionView.reloadData()
-        }
+        
+//        photoService.photoOfPerson(userId)
+        
+//        {
+//            self.loadData()
+//            self.collectionView.reloadData()
+//        }
         
 //        photoService.photoOfPerson(userId) { [weak self] responce in
 //            guard let self = self else {return}
@@ -49,17 +70,17 @@ class FriendsCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
     
-    func loadData(){
-           do{
-               let realm = try Realm()
-               let photos = realm.objects(PhotoService.self)
-               photo = Array(photos)
-               
-           }
-           catch{
-               print (error.localizedDescription)
-           }
-       }
+//    func loadData(){
+//           do{
+//               let realm = try Realm()
+//               let photos = realm.objects(PhotoService.self)
+//               photo = Array(photos)
+//
+//           }
+//           catch{
+//               print (error.localizedDescription)
+//           }
+//       }
        
    
     // MARK: - Navigation
@@ -91,12 +112,12 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return photo.count
+        return photo?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath) as? FriendsCollectionViewCell
-        let photoAlbumService:PhotoService = photo[indexPath.item]
+        let photoAlbumService = (photo?[indexPath.item])!
         if let url = URL(string:photoAlbumService.userPhoto),
         let data = try? Data(contentsOf: url){
             cell?.friendsPhoto.image = UIImage(data: data)}

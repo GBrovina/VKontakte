@@ -18,7 +18,7 @@ class VKService{
    
 //  MARK: -List of Friends
 //    func listOfFriends(completion: @escaping (Swift.Result<[Friends],Error>) -> Void){
-    func listOfFriends(completion: @escaping () -> Void){
+    func listOfFriends(){
         let apiKey = Session.instance.token
         let path = "/method/friends.get"
         let dataB:DataBase = .init()
@@ -44,14 +44,13 @@ class VKService{
                 print(friend.count)
                 dataB.saveFriends(friends: friend)
                 print(dataB.friends())
-                completion()
             case .failure(let error):
                 print(error.localizedDescription)
             }
     }
 }
 //    MARK: - List of Group
-     func listOfGroup(completion: @escaping () -> Void){
+     func listOfGroup(){
 //        func listOfGroup(completion: @escaping (Swift.Result<[MyGroup],Error>) -> Void){
         let apiKey = Session.instance.token
         let path = "/method/groups.get"
@@ -76,7 +75,7 @@ class VKService{
                             print(group.count)
                             dataB.saveGroups(groups: group)
                             print(dataB.groups())
-                             completion()
+                            
 //                            completion(.success(group))
                         case .failure(let error):
                             print(error.localizedDescription)
@@ -84,7 +83,7 @@ class VKService{
         }
     }
 //    MARK: - photo of Person
-    func photoOfPerson(_ userId:Int,completion: @escaping () -> Void ){
+    func photoOfPerson(_ userId:Int){
 //        func photoOfPerson(_ userId:Int,completion: @escaping (Swift.Result<[PhotoService],Error>) -> Void ){
         let apiKey = Session.instance.token
         let path = "/method/photos.getAll"
@@ -109,7 +108,6 @@ class VKService{
                     print(photo.count)
                     dataB.savePhoto(photo: photo)
                     print(dataB.photo())
-                    completion()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

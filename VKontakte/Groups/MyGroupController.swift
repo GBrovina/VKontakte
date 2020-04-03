@@ -12,12 +12,11 @@ import RealmSwift
 class MyGroupController: UITableViewController {
 
     let myGroupService = VKService()
-    var myGroup = [MyGroup]()
+//    var myGroup = [MyGroup]()
+    var myGroup:Results<MyGroup>?
+    var token:[NotificationToken] = []
     
-//    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
-//                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
-    
-    private var fitredGroups = [MyGroup]()
+    private var fitredGroups:Results<MyGroup>?
     
     
     @IBOutlet weak var searchGroup: UISearchBar! {
@@ -27,30 +26,92 @@ class MyGroupController: UITableViewController {
     }
     
     
+//    MARK: - IBAction AddGroup
     
-    @IBAction func addGroup (segue:UIStoryboardSegue) {
-        if segue.identifier == "unGroups"{
-            let groupController = segue.source as! GroupController
-            if let indexPath = groupController.tableView.indexPathForSelectedRow{
-                let group = groupController.myGroup[indexPath.row]
-                
-                if !fitredGroups.contains(where: {$0.groupName==group.groupName}) {
-                fitredGroups.append(group)
-                tableView.reloadData()
+
+    @IBAction func addGroup(_ sender: UITabBarItem) {
+        showAddCityForm()
+    }
+//    @IBAction func addGroup (segue:UIStoryboardSegue) {
+//
+//        if segue.identifier == "unGroups"{
+//            let groupController = segue.source as! GroupController
+//            if let indexPath = groupController.tableView.indexPathForSelectedRow{
+//                let group = groupController.myGroup[indexPath.row]
+//
+//                if !fitredGroups.contains(where: {$0.groupName==group.groupName}) {
+//                fitredGroups.append(group)
+//                tableView.reloadData()
+//                }
+//            }
+//        }
+//    }
+    
+    
+    func showAddCityForm() {
+        let alertController = UIAlertController(title: "Введите название группы", message: nil, preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: nil)
+        let confirmAction = UIAlertAction(title: "Добавить", style: .default) { action in
+            guard let name = alertController.textFields?[0].text else { return }
+            let cleared = name.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if !cleared.isEmpty {
+                self.addGroup(name: name)
+            }
+        }
+        alertController.addAction(confirmAction)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func addGroup ( name:String){
+        do{
+                   let realm = try Realm()
+                   let Newgroups = MyGroup()
+                   Newgroups.groupName = name
+                   realm.beginWrite()
+                   realm.add(Newgroups)
+                   try realm.commitWrite()
+               }
+               catch{
+                   print (error.localizedDescription)
+               }
+    }
+
+    func observGroup() {
+        do{
+            guard let realm = try? Realm() else {return}
+            myGroup = realm.objects(MyGroup.self)
+            fitredGroups = myGroup
+            myGroup?.observe { (changes) in
+                switch changes{
+                case .initial:
+                    self.tableView.reloadData()
+                case .update(_,let deletions,let insertions,let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self.tableView.endUpdates()
+                case .error(let error):
+                    print (error.localizedDescription)
                 }
             }
+        } catch{
+            print (error.localizedDescription)
         }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        myGroupService.listOfGroup {
-            self.loadData()
-            self.fitredGroups = self.myGroup
-            self.tableView.reloadData()
-        }
+        observGroup()
+//        myGroupService.listOfGroup {
+//            self.loadData()
+//            self.fitredGroups = self.myGroup
+//            self.tableView.reloadData()
+//        }
 //        myGroupService.listOfGroup { [weak self] responce in
 //                   guard let self = self else {return}
 //                   switch responce{
@@ -72,17 +133,17 @@ class MyGroupController: UITableViewController {
 //        fitredGroups = myGroup
     }
     
-    func loadData(){
-        do{
-            let realm = try Realm()
-            let groups = realm.objects(MyGroup.self)
-            myGroup = Array(groups)
-            
-        }
-        catch{
-            print (error.localizedDescription)
-        }
-    }
+//    func loadData(){
+//        do{
+//            let realm = try Realm()
+//            let groups = realm.objects(MyGroup.self)
+//            myGroup = Array(groups)
+//
+//        }
+//        catch{
+//            print (error.localizedDescription)
+//        }
+//    }
 
     // MARK: - Table view data source
 
@@ -93,7 +154,7 @@ class MyGroupController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fitredGroups.count
+       return fitredGroups?.count ?? 0
     }
 
     
@@ -101,11 +162,11 @@ class MyGroupController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroup", for: indexPath) as! MyGroupCell
         
         
-        let name = fitredGroups[indexPath.row]
-        if let url = URL(string:name.imageGroup),
+        let name = myGroup?[indexPath.row]
+        if let url = URL(string:name?.imageGroup ?? ""),
         let data = try? Data(contentsOf: url){
             cell.myGroupImage.image = UIImage(data:data)}
-        cell.myGroupName.text = name.groupName
+        cell.myGroupName.text = name?.groupName
 
         // Configure the cell...
 
@@ -124,10 +185,20 @@ class MyGroupController: UITableViewController {
    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let group = myGroup?[indexPath.row]
         if editingStyle == .delete {
+            do{
+                let realm = try Realm()
+                realm.beginWrite()
+                realm.delete(group!)
+                try realm.commitWrite()
+                
+            }catch{
+                print (error.localizedDescription)
+            }
             // Delete the row from the data source
-            myGroup.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+//            myGroup.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
@@ -162,12 +233,25 @@ class MyGroupController: UITableViewController {
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             if searchText.isEmpty{
                 fitredGroups = myGroup
-                tableView.reloadData()
             } else {
-                fitredGroups = myGroup.filter {$0.groupName.contains(searchText)}
+            do{
+                let realm = try Realm()
+                let searchingGroups = realm.objects(MyGroup.self).filter("groupName CONTAINS %@",searchText)
+                fitredGroups = searchingGroups
+                token.removeAll()
                 tableView.reloadData()
+            }catch{
+                print (error.localizedDescription)
+                }
             }
-        }
+//            if searchText.isEmpty{
+//                fitredGroups = myGroup
+//                tableView.reloadData()
+//            } else {
+//                fitredGroups = myGroup?.filter {$0.groupName.contains(searchText)}
+//                tableView.reloadData()
+//            }
+       }
     }
     
     

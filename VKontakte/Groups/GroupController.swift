@@ -20,10 +20,10 @@ class GroupController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myGroupService.listOfGroup {
-                   self.loadData()
-                   self.tableView.reloadData()
-               }
+//        myGroupService.listOfGroup {
+//                   self.loadData()
+//                   self.tableView.reloadData()
+//               }
         
 //        myGroupService.listOfGroup { responce in
 //            guard let self = self else {return}

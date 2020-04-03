@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -204,29 +204,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHw-Rg-ObA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-736.23188405797111" y="96.428571428571431"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="FDD-5f-nOu">
-            <objects>
-                <viewController id="hiy-6v-6Z6" customClass="VKLoginViewController" customModule="VKontakte" customModuleProvider="target" sceneMemberID="viewController">
-                    <wkWebView key="view" contentMode="scaleToFill" id="9CG-7g-hXK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <wkWebViewConfiguration key="configuration">
-                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                            <wkPreferences key="preferences"/>
-                        </wkWebViewConfiguration>
-                    </wkWebView>
-                    <tabBarItem key="tabBarItem" title="Item" id="ZMF-DW-fHb"/>
-                    <navigationItem key="navigationItem" id="ORG-yz-W8E"/>
-                    <connections>
-                        <outlet property="webView" destination="9CG-7g-hXK" id="7LX-zQ-DDl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yQm-VN-IEU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="464" y="925"/>
         </scene>
         <!--Friends-->
         <scene sceneID="5a9-6n-Pqn">
@@ -675,7 +652,7 @@
                     <navigationItem key="navigationItem" title="MyGroups" id="FJ6-4s-cx1">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="IiM-X9-Mb9">
                             <connections>
-                                <segue destination="VWO-hQ-ulG" kind="show" id="G2t-G8-cdR"/>
+                                <action selector="addGroup:" destination="oc0-zn-8Nr" id="EW5-wy-wYS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -692,7 +669,7 @@
             <objects>
                 <tableViewController id="VWO-hQ-ulG" customClass="GroupController" customModule="VKontakte" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Pcn-6p-329">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -768,10 +745,10 @@
     <resources>
         <image name="Forest" width="700" height="990"/>
         <image name="art" width="1080" height="1338"/>
-        <image name="doc.plaintext" catalog="system" width="56" height="64"/>
+        <image name="doc.plaintext" catalog="system" width="115" height="128"/>
         <image name="mountains" width="640" height="1198"/>
-        <image name="person.3" catalog="system" width="72" height="35"/>
-        <image name="person.fill" catalog="system" width="64" height="60"/>
+        <image name="person.3" catalog="system" width="128" height="62"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="pigvin" width="88" height="100"/>
         <image name="surprisingly big album of iPhone wallpapers_1" width="640" height="260"/>
     </resources>

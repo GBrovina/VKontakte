@@ -13,21 +13,53 @@ import RealmSwift
 class FriendsTableViewController: UITableViewController {
 
     let friendsService = VKService()
-    var friend = [Friends]()
-    
-//   public var friend = [Friends(userName:"Fox", avatar:UIImage(named:"fox")!, photos:[UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!,UIImage(named:"fox")!]), Friends(userName:"Lion",avatar:UIImage(named:"Lion")!,photos:[UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!,UIImage(named:"Lion")!]), Friends(userName:"Pingvin",avatar:UIImage(named:"pigvin")!,photos:[UIImage(named:"pigvin")!,UIImage(named:"pigvin")!,UIImage(named:"pigvin")!]), Friends(userName:"Cow",avatar:UIImage(named:"cow")!,photos:[UIImage(named:"cow")!]), Friends(userName:"Cock",avatar:UIImage(named:"cock")!,photos:[UIImage(named:"Cock_2")!,UIImage(named:"cock_3")!,UIImage(named:"Cock_2")!,UIImage(named:"cock")!]), Friends(userName:"Leopard",avatar:UIImage(named:"leopard")!,photos:[UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!,UIImage(named:"leopard")!])]
-    
-    var sortiedFriends = [Character:[Friends]]()
+//    var friend = [Friends]()
+//    var sortiedFriends = [Character:[Friends]]()
 
+    var sections:[Results<Friends>] = []
+    var tokens:[NotificationToken] = []
+    
+    func prerareSection() {
+        do{
+           let realm = try Realm()
+            let friendsLetters = Array(Set(realm.objects(Friends.self).compactMap{$0.userName.first?.lowercased()})).sorted()
+            sections = friendsLetters.map{realm.objects(Friends.self).filter("userName BEGINSWITH[c] %s",$0)}
+            sections.enumerated().forEach{observeFriends(for: $0.offset, results: $0.element)}
+            tokens.removeAll()
+            tableView.reloadData()
+        }
+        catch {
+            print (error.localizedDescription)
+        }
+    }
+    
+    func observeFriends(for section:Int, results: Results<Friends>){
+        tokens.append(
+               results.observe { (changes) in
+                   switch changes{
+                   case .initial:
+                    self.tableView.reloadSections(IndexSet(integer:section), with: .automatic)
+                   case .update(_,let deletions,let insertions,let modifications):
+                       self.tableView.beginUpdates()
+                       self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section) }),with: .automatic)
+                       self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section)}), with: .automatic)
+                       self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section) }),with: .automatic)
+                       self.tableView.endUpdates()
+                   case .error(let error):
+                       print (error.localizedDescription)
+                   }
+               })
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        friendsService.listOfFriends{
-            self.loadData()
-            self.sortiedFriends = sort(friend: self.friend)
-            self.tableView.reloadData()
-        }
+        prerareSection()
+//        friendsService.listOfFriends{
+//            self.loadData()
+//            self.sortiedFriends = sort(friend: self.friend)
+//            self.tableView.reloadData()
+//        }
         
 //        friendsService.listOfFriends { [weak self] responce in
 //            guard let self = self else {return}
@@ -40,23 +72,23 @@ class FriendsTableViewController: UITableViewController {
 //                print(error.localizedDescription)
 //        }
 //        }
-        func sort(friend:[Friends]) -> [Character:[Friends]] {
-              var namesDict = [Character:[Friends]]()
-              
-              friend
-                  .sorted {$0.userName < $1.userName}
-                  .forEach { friend in
-                      guard let firstChar = friend.userName.first else {return}
-                      if var thisCharName = namesDict[firstChar] {
-                          thisCharName.append(friend)
-                          namesDict[firstChar] = thisCharName
-                      } else {
-                          namesDict[firstChar] = [friend]
-                      }
-                      
-              }
-              return namesDict
-          }
+//        func sort(friend:[Friends]) -> [Character:[Friends]] {
+//              var namesDict = [Character:[Friends]]()
+//
+//              friend
+//                  .sorted {$0.userName < $1.userName}
+//                  .forEach { friend in
+//                      guard let firstChar = friend.userName.first else {return}
+//                      if var thisCharName = namesDict[firstChar] {
+//                          thisCharName.append(friend)
+//                          namesDict[firstChar] = thisCharName
+//                      } else {
+//                          namesDict[firstChar] = [friend]
+//                      }
+//
+//              }
+//              return namesDict
+//          }
 //        self.sortiedFriends = sort(friend:friend)
         
         
@@ -68,45 +100,49 @@ class FriendsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    func loadData(){
-        do{
-            let realm = try Realm()
-            let friends = realm.objects(Friends.self)
-            friend = Array(friends)
-            
-        }
-        catch{
-            print (error.localizedDescription)
-        }
-    }
+//    func loadData(){
+//        do{
+//            let realm = try Realm()
+//            let friends = realm.objects(Friends.self)
+//            friend = Array(friends)
+//
+//        }
+//        catch{
+//            print (error.localizedDescription)
+//        }
+//    }
     
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return sortiedFriends.keys.count
+//        return sortiedFriends.keys.count
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let firstChar = sortiedFriends.keys.sorted()[section]
-        return String(firstChar)
+//        let firstChar = sortiedFriends.keys.sorted()[section]
+//        return String(firstChar)
+        return sections[section].first?.userName.first?.uppercased()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let keySorted = sortiedFriends.keys.sorted()
-        return sortiedFriends[keySorted[section]]?.count ?? 0
+//        let keySorted = sortiedFriends.keys.sorted()
+//        return sortiedFriends[keySorted[section]]?.count ?? 0
+        return sections[section].count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Friends", for: indexPath) as! FriendsTableViewCell
-        let firstChar = sortiedFriends.keys.sorted()[indexPath.section]
-        let friend = sortiedFriends[firstChar]!
-        let name:Friends = friend[indexPath.row]
-    
+//        let firstChar = sortiedFriends.keys.sorted()[indexPath.section]
+//        let friend = sortiedFriends[firstChar]!
         
+//        let name:Friends = friend[indexPath.row]
+    
+        let name = sections[indexPath.section][indexPath.row]
         cell.friendsName.text=name.userName
         
         if let url = URL(string:name.avatar),
@@ -169,12 +205,12 @@ class FriendsTableViewController: UITableViewController {
                 let selectedCell = tableView.indexPathForSelectedRow
                 else {return}
             
-            let firstChar = sortiedFriends.keys.sorted()[selectedCell.section]
-            let friend = sortiedFriends[firstChar]!
-            let name:Friends = friend[selectedCell.row]
-            let userId = name.userId
-            collectionViewController.userId = userId
-            collectionViewController.title = name.userName
+//            let firstChar = sortiedFriends.keys.sorted()[selectedCell.section]
+//            let friend = sortiedFriends[firstChar]!
+            let name:Results<Friends> = sections[selectedCell.section]
+            
+            collectionViewController.userId = name[selectedCell.row].userId
+            collectionViewController.title = name[selectedCell.row].userName
 //            collectionViewController.photoAlbum = name.photos
             
         }
