@@ -68,8 +68,8 @@ class MyGroupController: UITableViewController {
         do{
             guard let realm = try? Realm() else {return}
             myGroup = realm.objects(MyGroup.self)
-            fitredGroups = myGroup
-            myGroup?.observe { (changes) in
+           fitredGroups = myGroup
+            fitredGroups?.observe { (changes) in
                 switch changes{
                 case .initial:
                     self.tableView.reloadData()
@@ -118,7 +118,7 @@ class MyGroupController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroup", for: indexPath) as! MyGroupCell
         
         
-        let name = myGroup?[indexPath.row]
+        let name = fitredGroups?[indexPath.row]
         if let url = URL(string:name?.imageGroup ?? ""),
         let data = try? Data(contentsOf: url){
             cell.myGroupImage.image = UIImage(data:data)}

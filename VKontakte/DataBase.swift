@@ -16,7 +16,9 @@ class DataBase {
         do{
             let realm = try Realm()
             print (realm.configuration.fileURL)
+            let oldgroup = realm.objects(MyGroup.self)
             realm.beginWrite()
+            realm.delete(oldgroup)
             realm.add(groups)
             try realm.commitWrite()
         } catch {
