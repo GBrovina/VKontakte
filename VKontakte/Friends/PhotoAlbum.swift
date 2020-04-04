@@ -13,10 +13,7 @@ import RealmSwift
 
 class PhotoAlbum: UIViewController {
     
-    
-//   var selectedFriend:[UIImage] = []
     var numberOfSection:Int = 0
-    
     var selectedFriends: Results<PhotoService>? 
     
     @IBOutlet weak var additionalIV: UIImageView!

@@ -32,22 +32,7 @@ class MyGroupController: UITableViewController {
     @IBAction func addGroup(_ sender: UITabBarItem) {
         showAddCityForm()
     }
-//    @IBAction func addGroup (segue:UIStoryboardSegue) {
-//
-//        if segue.identifier == "unGroups"{
-//            let groupController = segue.source as! GroupController
-//            if let indexPath = groupController.tableView.indexPathForSelectedRow{
-//                let group = groupController.myGroup[indexPath.row]
-//
-//                if !fitredGroups.contains(where: {$0.groupName==group.groupName}) {
-//                fitredGroups.append(group)
-//                tableView.reloadData()
-//                }
-//            }
-//        }
-//    }
-    
-    
+
     func showAddCityForm() {
         let alertController = UIAlertController(title: "Введите название группы", message: nil, preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
@@ -107,43 +92,14 @@ class MyGroupController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         observGroup()
-//        myGroupService.listOfGroup {
-//            self.loadData()
-//            self.fitredGroups = self.myGroup
-//            self.tableView.reloadData()
-//        }
-//        myGroupService.listOfGroup { [weak self] responce in
-//                   guard let self = self else {return}
-//                   switch responce{
-//                   case .success(let myGroup):
-//                    self.loadData()
-////                    self.myGroup = myGroup
-//                    self.fitredGroups = myGroup
-//                       self.tableView.reloadData()
-//                   case .failure(let error):
-//                       print(error.localizedDescription)
-//               }
-//               }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        fitredGroups = myGroup
     }
     
-//    func loadData(){
-//        do{
-//            let realm = try Realm()
-//            let groups = realm.objects(MyGroup.self)
-//            myGroup = Array(groups)
-//
-//        }
-//        catch{
-//            print (error.localizedDescription)
-//        }
-//    }
+
 
     // MARK: - Table view data source
 
@@ -236,7 +192,7 @@ class MyGroupController: UITableViewController {
             } else {
             do{
                 let realm = try Realm()
-                let searchingGroups = realm.objects(MyGroup.self).filter("groupName CONTAINS %@",searchText)
+                let searchingGroups = realm.objects(MyGroup.self).filter("groupName CONTAINS[cd] %@",searchText)
                 fitredGroups = searchingGroups
                 token.removeAll()
                 tableView.reloadData()
@@ -244,13 +200,7 @@ class MyGroupController: UITableViewController {
                 print (error.localizedDescription)
                 }
             }
-//            if searchText.isEmpty{
-//                fitredGroups = myGroup
-//                tableView.reloadData()
-//            } else {
-//                fitredGroups = myGroup?.filter {$0.groupName.contains(searchText)}
-//                tableView.reloadData()
-//            }
+
        }
     }
     

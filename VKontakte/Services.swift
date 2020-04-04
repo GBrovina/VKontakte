@@ -17,7 +17,6 @@ class VKService{
     let apiKey = Session.instance.token
    
 //  MARK: -List of Friends
-//    func listOfFriends(completion: @escaping (Swift.Result<[Friends],Error>) -> Void){
     func listOfFriends(){
         let apiKey = Session.instance.token
         let path = "/method/friends.get"
@@ -36,7 +35,7 @@ class VKService{
         
         AF.request(url, method: .get, parameters: parameters).responseJSON {
             response in
-//            print(response.value)
+
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -51,7 +50,6 @@ class VKService{
 }
 //    MARK: - List of Group
      func listOfGroup(){
-//        func listOfGroup(completion: @escaping (Swift.Result<[MyGroup],Error>) -> Void){
         let apiKey = Session.instance.token
         let path = "/method/groups.get"
         let dataB:DataBase = .init()
@@ -76,7 +74,6 @@ class VKService{
                             dataB.saveGroups(groups: group)
                             print(dataB.groups())
                             
-//                            completion(.success(group))
                         case .failure(let error):
                             print(error.localizedDescription)
                         }
@@ -84,7 +81,6 @@ class VKService{
     }
 //    MARK: - photo of Person
     func photoOfPerson(_ userId:Int){
-//        func photoOfPerson(_ userId:Int,completion: @escaping (Swift.Result<[PhotoService],Error>) -> Void ){
         let apiKey = Session.instance.token
         let path = "/method/photos.getAll"
         let dataB:DataBase = .init()

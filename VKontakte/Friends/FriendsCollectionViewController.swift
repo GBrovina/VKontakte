@@ -14,7 +14,6 @@ private let reuseIdentifier = "Cell"
 class FriendsCollectionViewController: UICollectionViewController {
     
     let photoService = VKService()
-//    var photo  = [PhotoService]()
     var userId:Int = 0
     var photo: Results<PhotoService>?
     var token:[NotificationToken] = []
@@ -24,7 +23,6 @@ class FriendsCollectionViewController: UICollectionViewController {
     func observePhoto(){
         guard let realm = try? Realm() else {return}
         photo = realm.objects(PhotoService.self)
-        print(photo?.count)
         photo?.observe{(changes) in
             switch changes{
                           case .initial:
@@ -41,25 +39,7 @@ class FriendsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         observePhoto()
-        
-        
-//        photoService.photoOfPerson(userId)
-        
-//        {
-//            self.loadData()
-//            self.collectionView.reloadData()
-//        }
-        
-//        photoService.photoOfPerson(userId) { [weak self] responce in
-//            guard let self = self else {return}
-//            switch responce{
-//            case .success(let photo):
-//                self.photo = photo
-//                self.collectionView.reloadData()
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//        }
-//        }
+
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -70,19 +50,6 @@ class FriendsCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
     
-//    func loadData(){
-//           do{
-//               let realm = try Realm()
-//               let photos = realm.objects(PhotoService.self)
-//               photo = Array(photos)
-//
-//           }
-//           catch{
-//               print (error.localizedDescription)
-//           }
-//       }
-       
-   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -121,10 +88,6 @@ class FriendsCollectionViewController: UICollectionViewController {
         if let url = URL(string:photoAlbumService.userPhoto),
         let data = try? Data(contentsOf: url){
             cell?.friendsPhoto.image = UIImage(data: data)}
-//        cell?.friendsPhoto.image = photoAlbum[indexPath.item]
-    
-        // Configure the cell
-    
         return cell!
     }
 
