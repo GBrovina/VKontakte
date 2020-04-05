@@ -52,6 +52,7 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prerareSection()
+        friendsService.listOfFriends()
     }
 
 

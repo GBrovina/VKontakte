@@ -92,7 +92,7 @@ class MyGroupController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         observGroup()
-        
+        myGroupService.listOfGroup()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
