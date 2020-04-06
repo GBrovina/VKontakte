@@ -38,9 +38,8 @@ class FriendsCollectionViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        observePhoto()
         photoService.photoOfPerson(userId)
-        
+        observePhoto()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
