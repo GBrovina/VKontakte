@@ -9,12 +9,25 @@
 import UIKit
 import SwiftyJSON
 import RealmSwift
+import FirebaseAuth
 
 class FriendsTableViewController: UITableViewController {
 
     let friendsService = VKService()
     var sections:[Results<Friends>] = []
     var tokens:[NotificationToken] = []
+    
+    @IBAction func logOut(_ sender: Any) {
+        do {
+               try Auth.auth().signOut()
+               self.dismiss(animated: true, completion: nil)
+           } catch (let error) {
+               
+               print("Auth sign out failed: \(error)")
+           }
+
+    }
+    
     
     func prerareSection() {
         do{

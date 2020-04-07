@@ -19,8 +19,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mountains" translatesAutoresizingMaskIntoConstraints="NO" id="ITx-kD-GuV">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeu-R3-FHW">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeu-R3-FHW">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pY6-sA-FxA">
                                         <rect key="frame" x="179" y="222" width="71" height="36"/>
@@ -67,7 +67,14 @@
                                         </state>
                                         <connections>
                                             <action selector="goButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Mc-Y7-pwf"/>
-                                            <segue destination="h46-Ml-cyK" kind="show" id="6Pr-7H-Msc"/>
+                                            <action selector="logIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cub-Gd-e65"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFr-3j-ggY">
+                                        <rect key="frame" x="172" y="488" width="71" height="31"/>
+                                        <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="signIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HeR-CT-4cH"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -78,6 +85,8 @@
                                     <constraint firstItem="2ct-jU-fde" firstAttribute="top" secondItem="oMV-yb-fs1" secondAttribute="bottom" constant="41" id="D5N-zP-o4A"/>
                                     <constraint firstItem="TVm-gJ-04R" firstAttribute="centerX" secondItem="fMI-5N-GTg" secondAttribute="centerX" id="HaG-Qr-ghW"/>
                                     <constraint firstItem="oMV-yb-fs1" firstAttribute="top" secondItem="QE2-2y-JN9" secondAttribute="bottom" constant="26" id="KtE-5O-9gw"/>
+                                    <constraint firstItem="PFr-3j-ggY" firstAttribute="top" secondItem="2ct-jU-fde" secondAttribute="bottom" constant="10" id="LDH-f9-6sd"/>
+                                    <constraint firstItem="PFr-3j-ggY" firstAttribute="centerX" secondItem="qeu-R3-FHW" secondAttribute="centerX" id="Ma9-jq-Vvo"/>
                                     <constraint firstItem="QE2-2y-JN9" firstAttribute="centerX" secondItem="Nfi-Zk-ezL" secondAttribute="centerX" id="aLX-K2-wcw"/>
                                     <constraint firstItem="TVm-gJ-04R" firstAttribute="top" secondItem="fMI-5N-GTg" secondAttribute="top" constant="30" id="aMs-SD-BEm"/>
                                     <constraint firstItem="pY6-sA-FxA" firstAttribute="top" secondItem="TVm-gJ-04R" secondAttribute="bottom" constant="80" id="db1-lV-LlG"/>
@@ -113,11 +122,12 @@
                         <outlet property="loginText" destination="Nfi-Zk-ezL" id="M0a-Sf-8GW"/>
                         <outlet property="passwordText" destination="oMV-yb-fs1" id="GiN-Vu-T94"/>
                         <outlet property="scrollView" destination="qeu-R3-FHW" id="cwI-Id-eox"/>
+                        <segue destination="h46-Ml-cyK" kind="presentation" identifier="logIn" modalPresentationStyle="fullScreen" id="IHi-fR-Tgc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1862" y="55"/>
+            <point key="canvasLocation" x="-1862.3188405797102" y="54.910714285714285"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gBU-Jx-9Vo">
@@ -144,11 +154,11 @@
             <objects>
                 <viewController id="h46-Ml-cyK" customClass="VKLoginViewController" customModule="VKontakte" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XlE-GN-MPR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPV-Z8-s5I">
-                                <rect key="frame" x="0.0" y="425" width="414" height="408"/>
+                                <rect key="frame" x="0.0" y="479" width="414" height="408"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="408" id="ztm-hh-jBn"/>
@@ -162,7 +172,7 @@
                                 <rect key="frame" x="0.0" y="33" width="414" height="293"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ge-Vx-U3n">
-                                        <rect key="frame" x="80.666666666666686" y="177" width="253" height="40"/>
+                                        <rect key="frame" x="80.666666666666686" y="182" width="253" height="40"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ClK-u1-xfD"/>
@@ -459,7 +469,13 @@
                             <outlet property="delegate" destination="eva-So-RLM" id="Mi3-T7-qOb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Friends" id="yhw-mI-Uuf"/>
+                    <navigationItem key="navigationItem" title="Friends" id="yhw-mI-Uuf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="uhX-WU-zkr">
+                            <connections>
+                                <action selector="logOut:" destination="eva-So-RLM" id="Kj2-tr-ZSf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60J-uk-T0l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
