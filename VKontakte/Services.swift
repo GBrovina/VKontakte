@@ -40,9 +40,9 @@ class VKService{
             case .success(let value):
                 let json = JSON(value)
                 let friend = json["response"]["items"].arrayValue.map {Friends($0)}
-                print(friend.count)
+//                print(friend.count)
                 dataB.saveFriends(friends: friend)
-                print(dataB.friends())
+//                print(dataB.friends())
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -65,20 +65,51 @@ class VKService{
             
             
             AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-//            print(response.value)
+
                 switch response.result {
                         case .success(let value):
                             let json = JSON(value)
                             let group = json["response"]["items"].arrayValue.map {MyGroup($0)}
-                            print(group.count)
                             dataB.saveGroups(groups: group)
-                            print(dataB.groups())
-                            
                         case .failure(let error):
                             print(error.localizedDescription)
                         }
         }
     }
+//    MARK: - List of News
+    func listOfNews() {
+        let apiKey = Session.instance.token
+        let path = "/method/newsfeed.get"
+        let dataB:DataBase = .init()
+        
+        let parameters:Parameters = [
+                  "access_token":apiKey,
+                  "extended":1,
+                  "filters": "post",
+                  "v":5.103
+              ]
+        
+        let url = baseUrl+path
+                    
+                    
+                    AF.request(url, method: .get, parameters: parameters).responseJSON { response in
+//                    print(response.value)
+                        switch response.result {
+                                case .success(let value):
+                                    let json = JSON(value)
+                                    let news = json["response"]["items"].arrayValue.map {News($0)}
+//                                    let groups = json["response"]["group"].arrayValue.map{MyGroup($0)}
+//                                    let users = json["response"]["profiles"].arrayValue.map{Friends($0)}
+                                    dataB.saveNews(news: news)
+                                   print("lfyyst bp htfkvf \(dataB.news())")
+                                    
+                                case .failure(let error):
+                                    print(error.localizedDescription)
+                                }
+        
+            }
+    }
+    
 //    MARK: - photo of Person
     func photoOfPerson(_ userId:Int){
         let apiKey = Session.instance.token
@@ -101,9 +132,9 @@ class VKService{
                 case .success(let value):
                     let json = JSON(value)
                     let photo = json["response"]["items"].arrayValue.map {PhotoService($0)}
-                    print(photo.count)
+//                    print(photo.count)
                     dataB.savePhoto(photo: photo)
-                    print(dataB.photo())
+//                    print(dataB.photo())
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

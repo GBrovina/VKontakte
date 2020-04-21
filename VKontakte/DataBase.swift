@@ -37,6 +37,36 @@ class DataBase {
             }
         }
     
+//    MARK: - News
+    func saveNews ( news:[News]) {
+          do{
+              let realm = try Realm()
+              let oldnews = realm.objects(News.self)
+            
+              realm.beginWrite()
+            
+              realm.delete(oldnews)
+
+            
+              realm.add(news)
+          
+              try realm.commitWrite()
+          } catch {
+              print (error)
+          }
+      }
+      
+      func news() -> [News] {
+              do{
+                  let realm = try Realm()
+                  let objects = realm.objects(News.self)
+                  return Array(objects)
+              }
+              catch {
+                  return []
+              }
+          }
+    
  //   MARK: -Friends
     func saveFriends ( friends:[Friends] ) {
            do{

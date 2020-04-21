@@ -44,8 +44,8 @@ class MyGroupController: UITableViewController {
             
             if !cleared.isEmpty {
                 self.addGroup(name: name)
-                let currentUser = Auth.auth().currentUser?.email
-                Database.database().reference(withPath: "user").child("group").updateChildValues(["\(currentUser)":name])
+//                let currentUser = Auth.auth().currentUser?.email
+//                Database.database().reference(withPath: "user").child("group").updateChildValues(["\(currentUser)":name])
             }
         }
         alertController.addAction(confirmAction)

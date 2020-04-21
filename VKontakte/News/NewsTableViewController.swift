@@ -12,43 +12,41 @@ import RealmSwift
 class NewsTableViewController: UITableViewController {
 
     let myGroupService = VKService()
-//    var myGroup = [MyGroup(groupName:"Art",imageGroup:UIImage(named:"art")!),
-//                   MyGroup(groupName:"Forest",imageGroup:UIImage(named:"Forest")!) ]
-    var myGroup = [MyGroup]()
+//    var myGroup = [MyGroup]()
+    var myNews:Results<News>?
+    var token:[NotificationToken] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        myGroupService.listOfGroup {
-//            self.loadData()
-//            self.tableView.reloadData()
-//        }
-//        myGroupService.listOfGroup { [weak self] responce in
-//            guard let self = self else {return}
-//            switch responce{
-//            case .success(let myGroup):
-//             self.myGroup = myGroup
-//
-//                self.tableView.reloadData()
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//        }
-//        }
+        observNews()
+        myGroupService.listOfNews()
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    // MARK: - LoadData
-    func loadData(){
+    // MARK: - ObservNews
+    func observNews() {
         do{
-            let realm = try Realm()
-            let groups = realm.objects(MyGroup.self)
-            myGroup = Array(groups)
-            
-        }
-        catch{
+            guard let realm = try? Realm() else {return}
+            myNews = realm.objects(News.self)
+            myNews?.observe { (changes) in
+                switch changes{
+                case .initial:
+                    self.tableView.reloadData()
+                case .update(_,let deletions,let insertions,let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self.tableView.endUpdates()
+                case .error(let error):
+                    print (error.localizedDescription)
+                }
+            }
+        } catch{
             print (error.localizedDescription)
         }
     }
@@ -58,7 +56,7 @@ class NewsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return myGroup.count
+        return myNews?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,26 +69,29 @@ class NewsTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleNews", for: indexPath) as! TitleNewsTableViewCell
-            let name = myGroup[indexPath.section]
-            cell.nameOfNews.text = name.groupName
-            
-            if let url = URL(string:name.imageGroup),
-            let data = try? Data(contentsOf: url){
-                cell.pictureOfNews.image = UIImage(data:data)}
+//            let name = myGroup[indexPath.section]
+//            cell.nameOfNews.text = name.groupName
+//
+//            if let url = URL(string:name.imageGroup),
+//            let data = try? Data(contentsOf: url){
+//                cell.pictureOfNews.image = UIImage(data:data)}
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textNews", for: indexPath) as! TextTableViewCell
-            cell.textNews.text = "A forest is a large area dominated by trees. Hundreds of more precise definitions of forest are used throughout the world, incorporating factors such as tree density, tree height, land use, legal standing and ecological function."
+            let textNews = myNews?[indexPath.section]
+            cell.textNews.text = textNews?.textNews
+//            cell.textNews.text = "A forest is a large area dominated by trees. Hundreds of more precise definitions of forest are used throughout the world, incorporating factors such as tree density, tree height, land use, legal standing and ecological function."
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
-            let name = myGroup[indexPath.section]
-            if let url = URL(string:name.imageGroup),
-            let data = try? Data(contentsOf: url){
-                cell.photoNews.image = UIImage(data:data)}
+//            let name = myGroup[indexPath.section]
+//            if let url = URL(string:name.imageGroup),
+//            let data = try? Data(contentsOf: url){
+//                cell.photoNews.image = UIImage(data:data)}
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
+            let likeCount = myNews?[indexPath.section].likeCount
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
