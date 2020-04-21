@@ -84,10 +84,10 @@ class NewsTableViewController: UITableViewController {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
-//            let name = myGroup[indexPath.section]
-//            if let url = URL(string:name.imageGroup),
-//            let data = try? Data(contentsOf: url){
-//                cell.photoNews.image = UIImage(data:data)}
+            let name = myNews?[indexPath.section]
+            if let url = URL(string:name?.photoNews ?? ""),
+            let data = try? Data(contentsOf: url){
+                cell.photoNews.image = UIImage(data:data)}
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell

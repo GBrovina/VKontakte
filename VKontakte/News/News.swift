@@ -25,7 +25,7 @@ class News: Object {
         self.init()
         self.sourceId = json["source_id"].intValue
         self.textNews = json["text"].stringValue
-        self.photoNews = json["attachments"][0]["photo"].stringValue
+        self.photoNews = json["attachments"][0]["photo"]["sizes"][2]["url"].stringValue
         self.likeCount = json["likes"]["count"].intValue
         self.repostCount = json["reposts"]["count"].intValue
         self.messageCount = json["comments"]["count"].intValue
