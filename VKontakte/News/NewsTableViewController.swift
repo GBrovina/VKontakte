@@ -109,11 +109,18 @@ class NewsTableViewController: UITableViewController {
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
-            let likeCount = myNews?[indexPath.section].likeCount
+            guard let likeCount = myNews?[indexPath.section].likeCount,
+                let repostCount = myNews?[indexPath.section].repostCount,
+                let messageCount = myNews?[indexPath.section].messageCount
+                else {return UITableViewCell()}
+            
+            let customLike:CustomLineOfNews = cell.likeNews as! CustomLineOfNews
+            customLike.countLike = likeCount
+            customLike.countMessage = messageCount
+            customLike.countRepost = repostCount
             
             return cell
         default:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
             return UITableViewCell()
 
         // Configure the cell...

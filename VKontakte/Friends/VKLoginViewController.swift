@@ -15,12 +15,12 @@ class VKLoginViewController:UIViewController{
     @IBOutlet weak var webView: WKWebView!
     
    
-    @IBOutlet weak var success: UIButton!
+//    @IBOutlet weak var success: UIButton!
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        success.layer.cornerRadius = 10
+//        success.layer.cornerRadius = 10
         
         
         var urlComponents = URLComponents()
@@ -40,7 +40,10 @@ class VKLoginViewController:UIViewController{
         webView.navigationDelegate = self
         webView.load(request)
     }
+    
 }
+
+
 
 extension VKLoginViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
@@ -66,7 +69,7 @@ extension VKLoginViewController: WKNavigationDelegate {
         Session.instance.token = token!
         
         print(token!)
-        
+        performSegue(withIdentifier: "loginSuccsess", sender: nil)
         
         decisionHandler(.cancel)
     }
