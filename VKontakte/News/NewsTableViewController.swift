@@ -69,18 +69,36 @@ class NewsTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleNews", for: indexPath) as! TitleNewsTableViewCell
-//            let name = myGroup[indexPath.section]
-//            cell.nameOfNews.text = name.groupName
-//
-//            if let url = URL(string:name.imageGroup),
-//            let data = try? Data(contentsOf: url){
-//                cell.pictureOfNews.image = UIImage(data:data)}
+            
+            guard let sourecID = myNews?[indexPath.section].sourceId else {return UITableViewCell()}
+            if sourecID>0{
+                do{
+                    let realm = try Realm()
+                    let name = realm.object(ofType: Friends.self, forPrimaryKey: sourecID)
+                    cell.nameOfNews.text = name?.userName
+                    if let url = URL(string:name?.avatar ?? ""),
+                    let data = try? Data(contentsOf: url){
+                    cell.pictureOfNews.image = UIImage(data:data)}
+                } catch {
+                    print(error.localizedDescription)
+                }
+            } else {
+                do{
+                    let realm = try Realm()
+                    let name = realm.object(ofType: MyGroup.self, forPrimaryKey: -sourecID)
+                    cell.nameOfNews.text = name?.groupName
+                    if let url = URL(string:name?.imageGroup ?? ""),
+                    let data = try? Data(contentsOf: url){
+                    cell.pictureOfNews.image = UIImage(data:data)}
+                } catch {
+                    print(error.localizedDescription)
+                    }
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textNews", for: indexPath) as! TextTableViewCell
             let textNews = myNews?[indexPath.section]
             cell.textNews.text = textNews?.textNews
-//            cell.textNews.text = "A forest is a large area dominated by trees. Hundreds of more precise definitions of forest are used throughout the world, incorporating factors such as tree density, tree height, land use, legal standing and ecological function."
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
@@ -92,10 +110,11 @@ class NewsTableViewController: UITableViewController {
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
             let likeCount = myNews?[indexPath.section].likeCount
+            
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
-            return cell
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
+            return UITableViewCell()
 
         // Configure the cell...
         }

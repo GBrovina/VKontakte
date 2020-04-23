@@ -42,7 +42,7 @@ class VKService{
                 let friend = json["response"]["items"].arrayValue.map {Friends($0)}
 //                print(friend.count)
                 dataB.saveFriends(friends: friend)
-//                print(dataB.friends())
+                print(dataB.friends())
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -101,7 +101,7 @@ class VKService{
 //                                    let groups = json["response"]["group"].arrayValue.map{MyGroup($0)}
 //                                    let users = json["response"]["profiles"].arrayValue.map{Friends($0)}
                                     dataB.saveNews(news: news)
-                                   print("lfyyst bp htfkvf \(dataB.news())")
+//                                   print("lfyyst bp htfkvf \(dataB.news())")
                                     
                                 case .failure(let error):
                                     print(error.localizedDescription)

@@ -27,5 +27,8 @@ class Friends: Object{
         self.userId = json["id"].intValue
     }
 
+    override static func primaryKey() -> String? {
+        return "userId"
+    }
 }
 
