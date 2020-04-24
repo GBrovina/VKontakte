@@ -11,8 +11,10 @@ import SwiftyJSON
 import RealmSwift
 
 class DataBase {
+    
 //   MARK: -Groups
     func saveGroups ( groups:[MyGroup] ) {
+        
         do{
             let realm = try Realm()
             print (realm.configuration.fileURL)
@@ -37,19 +39,15 @@ class DataBase {
             }
         }
     
+    
 //    MARK: - News
     func saveNews ( news:[News]) {
           do{
               let realm = try Realm()
               let oldnews = realm.objects(News.self)
-            
               realm.beginWrite()
-            
               realm.delete(oldnews)
-
-            
               realm.add(news)
-          
               try realm.commitWrite()
           } catch {
               print (error)

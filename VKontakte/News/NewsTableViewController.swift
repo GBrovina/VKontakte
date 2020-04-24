@@ -118,7 +118,7 @@ class NewsTableViewController: UITableViewController {
             customLike.countLike = likeCount
             customLike.countMessage = messageCount
             customLike.countRepost = repostCount
-            
+            cell.likeNews = customLike
             return cell
         default:
             return UITableViewCell()

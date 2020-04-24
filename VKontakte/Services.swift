@@ -32,7 +32,7 @@ class VKService{
     
         let url = baseUrl+path
         
-        
+        DispatchQueue.global().async {
         AF.request(url, method: .get, parameters: parameters).responseJSON {
             response in
 
@@ -41,12 +41,16 @@ class VKService{
                 let json = JSON(value)
                 let friend = json["response"]["items"].arrayValue.map {Friends($0)}
 //                print(friend.count)
+                
+                DispatchQueue.main.async {
                 dataB.saveFriends(friends: friend)
                 print(dataB.friends())
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
     }
+}
 }
 //    MARK: - List of Group
      func listOfGroup(){
@@ -63,18 +67,23 @@ class VKService{
         
             let url = baseUrl+path
             
-            
+            DispatchQueue.global().async {
             AF.request(url, method: .get, parameters: parameters).responseJSON { response in
 
                 switch response.result {
                         case .success(let value):
                             let json = JSON(value)
                             let group = json["response"]["items"].arrayValue.map {MyGroup($0)}
+                            
+                            DispatchQueue.main.async {
                             dataB.saveGroups(groups: group)
+                            }
+                    
                         case .failure(let error):
                             print(error.localizedDescription)
                         }
         }
+    }
     }
 //    MARK: - List of News
     func listOfNews() {
@@ -91,17 +100,18 @@ class VKService{
         
         let url = baseUrl+path
                     
-                    
+        DispatchQueue.global().async {
+        
                     AF.request(url, method: .get, parameters: parameters).responseJSON { response in
 //                    print(response.value)
                         switch response.result {
                                 case .success(let value):
                                     let json = JSON(value)
                                     let news = json["response"]["items"].arrayValue.map {News($0)}
-//                                    let groups = json["response"]["group"].arrayValue.map{MyGroup($0)}
-//                                    let users = json["response"]["profiles"].arrayValue.map{Friends($0)}
+                                    
+                                    DispatchQueue.main.async {
                                     dataB.saveNews(news: news)
-//                                   print("lfyyst bp htfkvf \(dataB.news())")
+                                    }
                                     
                                 case .failure(let error):
                                     print(error.localizedDescription)
@@ -109,7 +119,7 @@ class VKService{
         
             }
     }
-    
+    }
 //    MARK: - photo of Person
     func photoOfPerson(_ userId:Int){
         let apiKey = Session.instance.token
@@ -125,20 +135,22 @@ class VKService{
         
             let url = baseUrl+path
             
-            
+            DispatchQueue.global().async {
             AF.request(url, method: .get, parameters: parameters).responseJSON { response in
 //            print(response.value)
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let photo = json["response"]["items"].arrayValue.map {PhotoService($0)}
-//                    print(photo.count)
+                    
+                    DispatchQueue.main.async {
                     dataB.savePhoto(photo: photo)
-//                    print(dataB.photo())
+                    }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
         }
+    }
     }
 }
 
