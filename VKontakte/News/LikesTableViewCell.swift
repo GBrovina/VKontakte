@@ -11,7 +11,7 @@ import UIKit
 class LikesTableViewCell: UITableViewCell {
 
     
-    @IBOutlet weak var likeNews: UIView!
+    @IBOutlet weak var likeNews: CustomLineOfNews!
     
     
     override func awakeFromNib() {

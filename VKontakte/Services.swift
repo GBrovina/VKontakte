@@ -40,7 +40,6 @@ class VKService{
             case .success(let value):
                 let json = JSON(value)
                 let friend = json["response"]["items"].arrayValue.map {Friends($0)}
-//                print(friend.count)
                 
                 DispatchQueue.main.async {
                 dataB.saveFriends(friends: friend)
@@ -151,6 +150,24 @@ class VKService{
                 }
         }
     }
+    }
+    
+//    MARK: - Reqest for Operations
+    
+    func reqestForOperation() -> DataRequest{
+        let apiKey = Session.instance.token
+            let path = "/method/friends.get"
+                
+            let parameters:Parameters = [
+                "order":apiKey,
+                "fields":"nickname, photo_200_orig",
+                "extended": 1,
+                "access_token":apiKey,
+                "v":5.103
+            ]
+        
+            let url = baseUrl+path
+        return AF.request(url, method: .get, parameters: parameters)
     }
 }
 

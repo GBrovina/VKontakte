@@ -20,9 +20,21 @@ class CustomLineOfNews:UIControl{
     var message:UIImageView!
     var repostCount:UILabel!
     var messageCount:UILabel!
-    var countLike:Int! = 0
-    var countRepost:Int! = 0
-    var countMessage:Int! = 0
+    var countLike:Int = 0{
+        didSet {
+            likeCount.text = String(countLike)
+        }
+    }
+    var countRepost:Int = 0 {
+        didSet {
+            repostCount.text = String(countRepost)
+        }
+    }
+    var countMessage:Int = 0 {
+        didSet {
+            messageCount.text = String(countMessage)
+        }
+    }
     
     override init (frame:CGRect){
         super.init(frame:frame)
@@ -38,7 +50,7 @@ class CustomLineOfNews:UIControl{
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(likeTapped))
         tapGR.numberOfTouchesRequired = 1
         addGestureRecognizer(tapGR)
-        likeCount = UILabel(frame:CGRect(x: 85, y: 10, width: 20, height: 23))
+        likeCount = UILabel(frame:CGRect(x: 85, y: 10, width: 30, height: 23))
         likeCount.text = String(countLike)
         likeCount.textColor = .black
         self.addSubview(likeCount)
@@ -77,7 +89,7 @@ class CustomLineOfNews:UIControl{
            likeCount.textColor = isLiked ? .black : .blue
            if isLiked == true {
                
-                   likeCount.text = String(countLike+1)
+            likeCount.text = String(countLike+1)
                
                
            } else {

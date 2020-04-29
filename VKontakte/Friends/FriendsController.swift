@@ -17,6 +17,10 @@ class FriendsTableViewController: UITableViewController {
     var sections:[Results<Friends>] = []
     var tokens:[NotificationToken] = []
     
+    let myQueue = OperationQueue()
+    let reqest = VKService().reqestForOperation()
+    
+    
     @IBAction func logOut(_ sender: Any) {
         do {
                try Auth.auth().signOut()
@@ -65,7 +69,15 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prerareSection()
-        friendsService.listOfFriends()
+//        friendsService.listOfFriends()
+        
+        let dataOperation = GetDataOperation(request: reqest)
+        self.myQueue.addOperation(dataOperation)
+        let parse = ParseData()
+        parse.addDependency(dataOperation)
+        self.myQueue.addOperation(parse)
+        self.tableView.reloadData()
+        
     }
 
 

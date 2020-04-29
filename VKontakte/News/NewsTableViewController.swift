@@ -16,6 +16,8 @@ class NewsTableViewController: UITableViewController {
     var myNews:Results<News>?
     var token:[NotificationToken] = []
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         observNews()
@@ -73,23 +75,29 @@ class NewsTableViewController: UITableViewController {
             guard let sourecID = myNews?[indexPath.section].sourceId else {return UITableViewCell()}
             if sourecID>0{
                 do{
+                    
                     let realm = try Realm()
                     let name = realm.object(ofType: Friends.self, forPrimaryKey: sourecID)
                     cell.nameOfNews.text = name?.userName
+                    DispatchQueue.main.async {
                     if let url = URL(string:name?.avatar ?? ""),
                     let data = try? Data(contentsOf: url){
-                    cell.pictureOfNews.image = UIImage(data:data)}
+                        cell.pictureOfNews.image = UIImage(data:data)}}
+                    
                 } catch {
                     print(error.localizedDescription)
                 }
+                
             } else {
                 do{
                     let realm = try Realm()
                     let name = realm.object(ofType: MyGroup.self, forPrimaryKey: -sourecID)
                     cell.nameOfNews.text = name?.groupName
+                    DispatchQueue.main.async {
                     if let url = URL(string:name?.imageGroup ?? ""),
                     let data = try? Data(contentsOf: url){
                     cell.pictureOfNews.image = UIImage(data:data)}
+                    }
                 } catch {
                     print(error.localizedDescription)
                     }
@@ -103,9 +111,12 @@ class NewsTableViewController: UITableViewController {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
             let name = myNews?[indexPath.section]
+            
+            DispatchQueue.main.async {
             if let url = URL(string:name?.photoNews ?? ""),
             let data = try? Data(contentsOf: url){
-                cell.photoNews.image = UIImage(data:data)}
+            cell.photoNews.image = UIImage(data:data)}
+            }
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "likeNews", for: indexPath) as! LikesTableViewCell
@@ -114,11 +125,9 @@ class NewsTableViewController: UITableViewController {
                 let messageCount = myNews?[indexPath.section].messageCount
                 else {return UITableViewCell()}
             
-            let customLike:CustomLineOfNews = cell.likeNews as! CustomLineOfNews
-            customLike.countLike = likeCount
-            customLike.countMessage = messageCount
-            customLike.countRepost = repostCount
-            cell.likeNews = customLike
+            cell.likeNews.countLike = likeCount
+            cell.likeNews.countMessage = messageCount
+            cell.likeNews.countRepost = repostCount
             return cell
         default:
             return UITableViewCell()
