@@ -17,7 +17,7 @@ class FriendsTableViewController: UITableViewController {
     var sections:[Results<Friends>] = []
     var tokens:[NotificationToken] = []
     
-    let myQueue = OperationQueue()
+    let myOp = OperationQueue()
     let reqest = VKService().reqestForOperation()
     
     
@@ -72,10 +72,10 @@ class FriendsTableViewController: UITableViewController {
 //        friendsService.listOfFriends()
         
         let dataOperation = GetDataOperation(request: reqest)
-        self.myQueue.addOperation(dataOperation)
+        self.myOp.addOperation(dataOperation)
         let parse = ParseData()
         parse.addDependency(dataOperation)
-        self.myQueue.addOperation(parse)
+        self.myOp.addOperation(parse)
         self.tableView.reloadData()
         
     }
