@@ -22,6 +22,10 @@ class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
         observNews()
         myGroupService.listOfNews()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 4
+     
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -105,17 +109,29 @@ class NewsTableViewController: UITableViewController {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textNews", for: indexPath) as! TextTableViewCell
-            let textNews = myNews?[indexPath.section]
-            cell.textNews.text = textNews?.textNews
+            guard let textNews = myNews?[indexPath.section] else {return UITableViewCell()}
+            
+            DispatchQueue.main.async {
+            if textNews.textNews == ""{
+                cell.textNews.isHidden = true
+            } else {
+                cell.textNews.text = textNews.textNews
+                cell.textNews.isHidden = false
+            }
+            }
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
-            let name = myNews?[indexPath.section]
+            guard let name = myNews?[indexPath.section] else {return UITableViewCell()}
             
             DispatchQueue.main.async {
-            if let url = URL(string:name?.photoNews ?? ""),
+            if let url = URL(string:name.photoNews),
             let data = try? Data(contentsOf: url){
-            cell.photoNews.image = UIImage(data:data)}
+            cell.photoNews.image = UIImage(data:data)
+                cell.photoNews.isHidden = false
+                } else {
+                cell.photoNews.isHidden = true
+            }
             }
             return cell
         case 3:
@@ -136,6 +152,10 @@ class NewsTableViewController: UITableViewController {
         }
     }
 
+//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
