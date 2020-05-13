@@ -11,6 +11,7 @@ target 'VKontakte' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'PromiseKit'
   # Pods for VKontakte
 
 end

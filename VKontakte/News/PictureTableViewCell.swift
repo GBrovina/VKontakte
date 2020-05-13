@@ -15,6 +15,7 @@ class PictureTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        photoNews.layer.cornerRadius = 7
         // Initialization code
     }
 
