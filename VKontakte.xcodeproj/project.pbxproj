@@ -45,6 +45,7 @@
 		3CDC946C2455FFEC00132307 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC946B2455FFEC00132307 /* GetDataOperation.swift */; };
 		3CDC946E24575B8100132307 /* ParseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC946D24575B8100132307 /* ParseData.swift */; };
 		3CDC9473245ED60400132307 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC9472245ED60400132307 /* Promise.swift */; };
+		3CDC9475246C5FD500132307 /* PhotoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC9474246C5FD500132307 /* PhotoCache.swift */; };
 		3CEBD927241E36CD002F0744 /* VKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEBD926241E36CD002F0744 /* VKLoginViewController.swift */; };
 		3CEBD929241EA444002F0744 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEBD928241EA444002F0744 /* Services.swift */; };
 		D8D46F4AAE6778876A5B5A60 /* Pods_VKontakte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957743EC7D0DA8518F5F9DA9 /* Pods_VKontakte.framework */; };
@@ -92,6 +93,7 @@
 		3CDC946B2455FFEC00132307 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
 		3CDC946D24575B8100132307 /* ParseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseData.swift; sourceTree = "<group>"; };
 		3CDC9472245ED60400132307 /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		3CDC9474246C5FD500132307 /* PhotoCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCache.swift; sourceTree = "<group>"; };
 		3CEBD926241E36CD002F0744 /* VKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
 		3CEBD928241EA444002F0744 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		3CEBD92A241EB3C8002F0744 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				3CA5AC77241957A000C3D62E /* Session.swift */,
 				3CEBD928241EA444002F0744 /* Services.swift */,
 				3C566695242932F400DB5CF0 /* DataBase.swift */,
+				3CDC9474246C5FD500132307 /* PhotoCache.swift */,
 			);
 			path = VKontakte;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				3C9E8DAE2406D28400CD2773 /* PhotoAlbum.swift in Sources */,
 				3CCD967723EEE7190019BEA9 /* FriendsController.swift in Sources */,
 				3CCD967D23EEE9E90019BEA9 /* MyGroupCell.swift in Sources */,
+				3CDC9475246C5FD500132307 /* PhotoCache.swift in Sources */,
 				3CDC946E24575B8100132307 /* ParseData.swift in Sources */,
 				3CDC946C2455FFEC00132307 /* GetDataOperation.swift in Sources */,
 				3CEBD929241EA444002F0744 /* Services.swift in Sources */,
