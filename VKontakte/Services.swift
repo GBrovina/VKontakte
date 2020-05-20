@@ -45,7 +45,7 @@ class VKService{
                     
     //                DispatchQueue.main.async {
                     dataB.saveFriends(friends: friend)
-                    print(dataB.friends())
+//                    print(dataB.friends())
     //                }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -171,7 +171,7 @@ class VKService{
             ]
         
             let url = baseUrl+path
-        return AF.request(url, method: .get, parameters: parameters)
+            return AF.request(url, method: .get, parameters: parameters)
     }
 }
 

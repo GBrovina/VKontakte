@@ -20,9 +20,10 @@ class NewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         observNews()
         myGroupService.listOfNews()
-        
+            
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 4
      
@@ -38,16 +39,16 @@ class NewsTableViewController: UITableViewController {
         do{
             guard let realm = try? Realm() else {return}
             myNews = realm.objects(News.self)
-            myNews?.observe { (changes) in
+            myNews?.observe { [weak self] (changes) in
                 switch changes{
                 case .initial:
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 case .update(_,let deletions,let insertions,let modifications):
-                    self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
-                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
-                    self.tableView.endUpdates()
+                    self?.tableView.beginUpdates()
+                    self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self?.tableView.endUpdates()
                 case .error(let error):
                     print (error.localizedDescription)
                 }
@@ -77,13 +78,14 @@ class NewsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleNews", for: indexPath) as! TitleNewsTableViewCell
             
             guard let sourecID = myNews?[indexPath.section].sourceId else {return UITableViewCell()}
+            
             if sourecID>0{
                 do{
                     
                     let realm = try Realm()
                     let name = realm.object(ofType: Friends.self, forPrimaryKey: sourecID)
-                    cell.nameOfNews.text = name?.userName
                     DispatchQueue.main.async {
+                    cell.nameOfNews.text = name?.userName
                     if let url = URL(string:name?.avatar ?? ""),
                     let data = try? Data(contentsOf: url){
                         cell.pictureOfNews.image = UIImage(data:data)}}
@@ -96,8 +98,8 @@ class NewsTableViewController: UITableViewController {
                 do{
                     let realm = try Realm()
                     let name = realm.object(ofType: MyGroup.self, forPrimaryKey: -sourecID)
-                    cell.nameOfNews.text = name?.groupName
                     DispatchQueue.main.async {
+                    cell.nameOfNews.text = name?.groupName
                     if let url = URL(string:name?.imageGroup ?? ""),
                     let data = try? Data(contentsOf: url){
                     cell.pictureOfNews.image = UIImage(data:data)}
@@ -140,10 +142,11 @@ class NewsTableViewController: UITableViewController {
                 let repostCount = myNews?[indexPath.section].repostCount,
                 let messageCount = myNews?[indexPath.section].messageCount
                 else {return UITableViewCell()}
-            
+            DispatchQueue.main.async {
             cell.likeNews.countLike = likeCount
             cell.likeNews.countMessage = messageCount
             cell.likeNews.countRepost = repostCount
+            }
             return cell
         default:
             return UITableViewCell()

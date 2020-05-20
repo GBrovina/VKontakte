@@ -39,12 +39,12 @@ class MyGroupController: UITableViewController {
     func showAddCityForm() {
         let alertController = UIAlertController(title: "Введите название группы", message: nil, preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
-        let confirmAction = UIAlertAction(title: "Добавить", style: .default) { action in
+        let confirmAction = UIAlertAction(title: "Добавить", style: .default) { [weak self] action in
             guard let name = alertController.textFields?[0].text else { return }
             let cleared = name.trimmingCharacters(in: .whitespacesAndNewlines)
             
             if !cleared.isEmpty {
-                self.addGroup(name: name)
+                self?.addGroup(name: name)
 //                let currentUser = Auth.auth().currentUser?.email
 //                Database.database().reference(withPath: "user").child("group").updateChildValues(["\(currentUser)":name])
             }
@@ -73,17 +73,17 @@ class MyGroupController: UITableViewController {
         do{
             guard let realm = try? Realm() else {return}
             myGroup = realm.objects(MyGroup.self)
-           fitredGroups = myGroup
-            fitredGroups?.observe { (changes) in
+            fitredGroups = myGroup
+            fitredGroups?.observe {[weak self] (changes) in
                 switch changes{
                 case .initial:
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 case .update(_,let deletions,let insertions,let modifications):
-                    self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
-                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
-                    self.tableView.endUpdates()
+                    self?.tableView.beginUpdates()
+                    self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                    self?.tableView.endUpdates()
                 case .error(let error):
                     print (error.localizedDescription)
                 }
@@ -122,16 +122,13 @@ class MyGroupController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroup", for: indexPath) as! MyGroupCell
-        
-        
         let name = fitredGroups?[indexPath.row]
-        if let url = URL(string:name?.imageGroup ?? ""),
-        let data = try? Data(contentsOf: url){
-            cell.myGroupImage.image = UIImage(data:data)}
-        cell.myGroupName.text = name?.groupName
-
-        // Configure the cell...
-
+        DispatchQueue.main.async {
+            if let url = URL(string:name?.imageGroup ?? ""),
+                let data = try? Data(contentsOf: url){
+                cell.myGroupImage.image = UIImage(data:data)}
+            cell.myGroupName.text = name?.groupName
+        }
         return cell
     }
     
@@ -148,6 +145,7 @@ class MyGroupController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let group = myGroup?[indexPath.row]
+        myGroupService.myQueue.async {
         if editingStyle == .delete {
             do{
                 let realm = try Realm()
@@ -157,6 +155,7 @@ class MyGroupController: UITableViewController {
                 
             }catch{
                 print (error.localizedDescription)
+            }
             }
             // Delete the row from the data source
 //            myGroup.remove(at: indexPath.row)

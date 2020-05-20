@@ -49,16 +49,16 @@ class FriendsTableViewController: UITableViewController {
     
     func observeFriends(for section:Int, results: Results<Friends>){
         tokens.append(
-               results.observe { (changes) in
+               results.observe { [weak self] (changes) in
                    switch changes{
                    case .initial:
-                    self.tableView.reloadSections(IndexSet(integer:section), with: .automatic)
+                    self?.tableView.reloadSections(IndexSet(integer:section), with: .automatic)
                    case .update(_,let deletions,let insertions,let modifications):
-                       self.tableView.beginUpdates()
-                       self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section) }),with: .automatic)
-                       self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section)}), with: .automatic)
-                       self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section) }),with: .automatic)
-                       self.tableView.endUpdates()
+                       self?.tableView.beginUpdates()
+                       self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section) }),with: .automatic)
+                       self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section)}), with: .automatic)
+                       self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section) }),with: .automatic)
+                       self?.tableView.endUpdates()
                    case .error(let error):
                        print (error.localizedDescription)
                    }
