@@ -69,7 +69,7 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prerareSection()
-//        friendsService.listOfFriends()
+        friendsService.listOfFriends()
         
         let dataOperation = GetDataOperation(request: reqest)
         self.myOp.addOperation(dataOperation)

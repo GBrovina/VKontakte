@@ -45,7 +45,7 @@ class VKService{
                     
     //                DispatchQueue.main.async {
                     dataB.saveFriends(friends: friend)
-//                    print(dataB.friends())
+                   print(dataB.friends())
     //                }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -89,13 +89,14 @@ class VKService{
     }
     }
 //    MARK: - List of News
-    func listOfNews() {
+    func listOfNews(startFrom: String, completion: @escaping (String)-> Void) {
         let apiKey = Session.instance.token
         let path = "/method/newsfeed.get"
         let dataB:DataBase = .init()
         
         let parameters:Parameters = [
                   "access_token":apiKey,
+                  "startFrom": startFrom,
                   "extended":1,
                   "filters": "post",
                   "v":5.103
@@ -111,10 +112,12 @@ class VKService{
                                 case .success(let value):
                                     let json = JSON(value)
                                     let news = json["response"]["items"].arrayValue.map {News($0)}
+                                    let nextFrom = json["response"]["next_from"].stringValue
                                     
-//                                    DispatchQueue.main.async {
+                                    
                                     dataB.saveNews(news: news)
-//                                    }
+                
+                                    completion(nextFrom)
                             
                                 case .failure(let error):
                                     print(error.localizedDescription)
