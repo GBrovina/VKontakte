@@ -489,50 +489,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7nQ-jH-Snl">
-                            <size key="itemSize" width="123" height="134"/>
+                            <size key="itemSize" width="180" height="178"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Photo" id="gL9-r1-Ln7" customClass="FriendsCollectionViewCell" customModule="VKontakte" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="h3G-ka-QQN">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="178"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pigvin" translatesAutoresizingMaskIntoConstraints="NO" id="59L-dT-blh">
-                                            <rect key="frame" x="25" y="25" width="100" height="100"/>
+                                            <rect key="frame" x="7" y="7" width="166" height="146"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="ccf-SQ-OzA"/>
-                                                <constraint firstAttribute="height" constant="100" id="cqW-Qa-5YR"/>
+                                                <constraint firstAttribute="height" constant="150" id="CTP-65-KWS"/>
+                                                <constraint firstAttribute="width" constant="100" id="wNd-ve-to1"/>
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KR4-il-wCD" customClass="CustomControl" customModule="VKontakte" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="130" width="110" height="17"/>
+                                            <rect key="frame" x="20" y="158" width="140" height="17"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="aNu-zT-6Kg"/>
-                                                <constraint firstAttribute="width" constant="130" id="jCP-21-vgy"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="KR4-il-wCD" firstAttribute="centerX" secondItem="59L-dT-blh" secondAttribute="centerX" id="4Gw-Nd-QfZ"/>
-                                        <constraint firstAttribute="bottom" secondItem="59L-dT-blh" secondAttribute="bottom" constant="25" id="59n-ia-7T1"/>
                                         <constraint firstAttribute="trailing" secondItem="KR4-il-wCD" secondAttribute="trailing" constant="20" symbolic="YES" id="6N5-cO-d7x"/>
                                         <constraint firstItem="KR4-il-wCD" firstAttribute="top" secondItem="59L-dT-blh" secondAttribute="bottom" constant="5" id="KDE-lW-2NH"/>
-                                        <constraint firstAttribute="trailing" secondItem="59L-dT-blh" secondAttribute="trailing" constant="25" id="PH7-rB-BhM"/>
-                                        <constraint firstItem="59L-dT-blh" firstAttribute="top" secondItem="h3G-ka-QQN" secondAttribute="top" constant="25" id="R3P-L3-FZX"/>
-                                        <constraint firstItem="59L-dT-blh" firstAttribute="leading" secondItem="h3G-ka-QQN" secondAttribute="leading" constant="25" id="UyF-Tz-bnn"/>
+                                        <constraint firstAttribute="trailing" secondItem="59L-dT-blh" secondAttribute="trailing" constant="7" id="PH7-rB-BhM"/>
+                                        <constraint firstItem="59L-dT-blh" firstAttribute="top" secondItem="h3G-ka-QQN" secondAttribute="top" constant="7" id="R3P-L3-FZX"/>
+                                        <constraint firstItem="59L-dT-blh" firstAttribute="leading" secondItem="h3G-ka-QQN" secondAttribute="leading" constant="7" id="UyF-Tz-bnn"/>
                                         <constraint firstItem="KR4-il-wCD" firstAttribute="leading" secondItem="h3G-ka-QQN" secondAttribute="leading" constant="20" symbolic="YES" id="XDh-kP-dFt"/>
                                         <constraint firstItem="KR4-il-wCD" firstAttribute="top" secondItem="59L-dT-blh" secondAttribute="bottom" constant="5" id="b3D-rp-UEs"/>
                                         <constraint firstAttribute="bottom" secondItem="KR4-il-wCD" secondAttribute="bottom" constant="3" id="ntb-By-Mff"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="customSize" width="150" height="150"/>
+                                <size key="customSize" width="180" height="178"/>
                                 <connections>
                                     <outlet property="friendsPhoto" destination="59L-dT-blh" id="Dzz-HX-IGg"/>
                                     <segue destination="DXQ-8v-piW" kind="show" identifier="photoOfFriendsSegue" id="hke-DX-eSA"/>
@@ -564,7 +562,7 @@
                                     <constraint firstAttribute="height" constant="350" id="vJF-Xx-gNA"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art" translatesAutoresizingMaskIntoConstraints="NO" id="Can-Co-fpD">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art" translatesAutoresizingMaskIntoConstraints="NO" id="Can-Co-fpD">
                                 <rect key="frame" x="0.0" y="246" width="414" height="350"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="350" id="YW4-A7-mXi"/>

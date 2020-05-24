@@ -70,9 +70,10 @@ class PhotoCache {
 
 //    MARK: - Load Image
     let cacheQueue = DispatchQueue(label: "cache")
+    let myqueue = VKService().myQueue
     
     func loadImage (for indexPath:IndexPath, at url:String){
-        AF.request(url).responseData(queue: cacheQueue){ [weak self] response in
+        AF.request(url).responseData(queue: myqueue){ [weak self] response in
             guard let data = response.data,
             let image = UIImage (data: data) else {return}
             
