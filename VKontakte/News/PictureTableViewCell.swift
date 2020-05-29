@@ -13,9 +13,22 @@ class PictureTableViewCell: UITableViewCell {
     
     @IBOutlet weak var photoNews: UIImageView!
     
+    @IBOutlet weak var heightConstraintImage: NSLayoutConstraint!
+    
+//    func setImage(image:UIImage?){
+//        
+//        guard let image = image else {return}
+//        photoNews.image = image
+//        
+//        let coeff = frame.width/image.size.width
+//        heightConstraintImage.constant = coeff*image.size.height
+//        
+//    }
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        photoNews.layer.cornerRadius = 7
         // Initialization code
     }
 

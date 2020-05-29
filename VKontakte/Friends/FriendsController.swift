@@ -68,16 +68,20 @@ class FriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prerareSection()
-//        friendsService.listOfFriends()
-        
+        friendsService.listOfFriends()
+
+        let reqest = VKService().reqestForOperation()
         let dataOperation = GetDataOperation(request: reqest)
         self.myOp.addOperation(dataOperation)
         let parse = ParseData()
         parse.addDependency(dataOperation)
         self.myOp.addOperation(parse)
+        let reload = ReloadTable()
+        reload.addDependency(parse)
+        self.myOp.addOperation(reload)
         self.tableView.reloadData()
-        
+        prerareSection()
+
     }
 
 
