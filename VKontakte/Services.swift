@@ -80,7 +80,7 @@ class VKService{
 //                            DispatchQueue.main.async {
                         dataB.saveGroups(groups: group)
 //                            }
-                    
+                        
                         case .failure(let error):
                             print(error.localizedDescription)
                         }
