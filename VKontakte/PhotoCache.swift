@@ -69,7 +69,6 @@ class PhotoCache {
     
 
 //    MARK: - Load Image
-//    let cacheQueue = DispatchQueue(label: "cache")
     let myqueue = VKService().myQueue
     
     func loadImage (for indexPath:IndexPath, at url:String){

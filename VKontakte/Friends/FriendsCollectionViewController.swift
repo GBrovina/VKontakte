@@ -86,16 +86,15 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Photo", for: indexPath) as? FriendsCollectionViewCell
-        let photoAlbumService = (photo?[indexPath.item])!
+        let photoAlbumService = try? (photo?[indexPath.item])
         
-
-        
-        if let url = URL(string:photoAlbumService.userPhoto),
-        let data = try? Data(contentsOf: url){
-            cell?.friendsPhoto.image = photoCache.photo(indexPath: indexPath, at: (photoAlbumService.userPhoto))
+//        if let url = URL(string:photoAlbumService.userPhoto),
+//        let data = try? Data(contentsOf: url){
+            
 //            cell?.friendsPhoto.image = UIImage(data: data)
             
-        }
+//        }
+        cell?.friendsPhoto.image = photoCache.photo(indexPath: indexPath, at: photoAlbumService?.userPhoto ?? "")
         return cell!
     }
 

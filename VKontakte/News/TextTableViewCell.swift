@@ -20,6 +20,7 @@ class TextTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var textNews: UITextView!
+    @IBOutlet weak var buttonheight: NSLayoutConstraint!
     @IBOutlet weak var textNewsHeight: NSLayoutConstraint!
     @IBOutlet weak var showMoreButton: UIButton!
     @IBAction func showMore(_ sender: Any) {
@@ -35,7 +36,13 @@ class TextTableViewCell: UITableViewCell {
         }
     }
     
-    
+    func getRowHeightFromText(text : String!) -> CGFloat{
+        let width = textNews.bounds.width - textNews.textContainerInset.left - textNews.textContainerInset.right
+        return text.boundingRect(with: .init(width: width, height: .infinity),
+                                 options: .usesLineFragmentOrigin,
+                                 attributes: [.font: textNews.font!],
+            context: nil).height
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

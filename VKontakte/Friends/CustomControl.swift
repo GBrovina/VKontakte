@@ -45,17 +45,6 @@ class CustomControl:UIControl{
         
     }
    
-//    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-//
-//              likeCount.textColor = UIColor.blue
-//              likeCount.text = String(count+1)
-//              likePic.image = UIImage(named: "fullLike")!
-//
-//              return true
-//
-//      }
-    
-    
     @objc func likeTapped(){
            isLiked.toggle()
            likePic.image = isLiked ? UIImage(named: "fullLike") : UIImage(named: "emptyLike")

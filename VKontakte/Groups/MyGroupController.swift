@@ -33,10 +33,10 @@ class MyGroupController: UITableViewController {
     
 
     @IBAction func addGroup(_ sender: UITabBarItem) {
-        showAddCityForm()
+        showAddGroupForm()
     }
 
-    func showAddCityForm() {
+    func showAddGroupForm() {
         let alertController = UIAlertController(title: "Введите название группы", message: nil, preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         let confirmAction = UIAlertAction(title: "Добавить", style: .default) { [weak self] action in
@@ -45,8 +45,7 @@ class MyGroupController: UITableViewController {
             
             if !cleared.isEmpty {
                 self?.addGroup(name: name)
-//                let currentUser = Auth.auth().currentUser?.email
-//                Database.database().reference(withPath: "user").child("group").updateChildValues(["\(currentUser)":name])
+
             }
         }
         alertController.addAction(confirmAction)
@@ -96,15 +95,16 @@ class MyGroupController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        observGroup()
         promiseService.forecastGroup()
+        observGroup()
+        
 //        myGroupService.listOfGroup()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     }
-    
+
 
 
     // MARK: - Table view data source

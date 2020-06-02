@@ -141,21 +141,18 @@ class NewsTableViewController: UITableViewController {
                 
                 if fullText.contains(indexPath){
                     cell.showMoreButton.setTitle("Show less", for: .normal)
-                    guard let textNews = myNews?[indexPath.section] else {return UITableViewCell()}
-                    DispatchQueue.main.async {
-                        cell.textNews.text = textNews.textNews
-                        cell.textNewsHeight.constant = 120
-                    }
                 } else {
                     cell.showMoreButton.setTitle("Show more", for: .normal)
-                    guard let textNews = myNews?[indexPath.section] else {return UITableViewCell()}
-                    cell.hiddenButton()
-                    DispatchQueue.main.async {
-                        cell.textNews.text = textNews.textNews
-                        cell.textNewsHeight.constant = 50
-                    }
                 }
+                guard let textNews = myNews?[indexPath.section] else {return UITableViewCell()}
+                DispatchQueue.main.async {
+                    cell.textNews.text = textNews.textNews
+                    cell.textNewsHeight.constant = cell.getRowHeightFromText(text: textNews.textNews)+cell.buttonheight.constant
+                             }
+                cell.hiddenButton()
+                
                     return cell
+                
             } else if (indexPath.row == 2 && news.hasText && news.hasImage) || (!news.hasText && news.hasImage && indexPath.row == 1) {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "pictureNews", for: indexPath) as! PictureTableViewCell
                     guard let name = myNews?[indexPath.section] else {return UITableViewCell()}
@@ -211,12 +208,12 @@ class NewsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 2, let news = myNews?[indexPath.section], news.hasImage
+        if indexPath.row == 2, let news = myNews?[indexPath.section], news.hasImage, news.hasText
         {return tableView.bounds.size.width*news.aspetRatio
             
-        }else if indexPath.row == 1, let news = myNews?[indexPath.section], news.hasText
-        {
-            return 120
+//        }else if indexPath.row == 1, let news = myNews?[indexPath.section], news.hasText
+//        {
+//            return 120
             
         } else {
             return UITableView.automaticDimension
